@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <div>
         <Link to='/'>
-          <button>League Games</button>
+          <button>Games Schedule</button>
         </Link>
         <Link to="/team-roster">
           <button>Team Rosters</button>
