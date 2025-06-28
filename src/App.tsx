@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
 import './App.css'
 import NavBar from './components/NavBar'
@@ -11,10 +11,14 @@ function App() {
 
   return (
     <>
-     <NavBar />
-     <GameSchedPage />
-     <TeamRosterPage />
-     <AddSubPage />
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<GameSchedPage />} />
+        <Route path="/team-roster" element={<TeamRosterPage />} />
+        <Route path="/add-sub" element={<AddSubPage />} />
+      </Routes>
+
     </>
   )
 }

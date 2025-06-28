@@ -22,6 +22,7 @@ body {
   margin: 0;
   display: flex;
   padding-top: 100px;
+  width: 90vw
   min-width: 320px;
   min-height: 100vh;
 }
@@ -48,4 +49,12 @@ body {
 
 .gamesList {
   border: dotted green 5px;
+}
+
+.addNewPlayer {
+  border: dotted hotpink 10px
+}
+
+.gameRosterPage {
+  border: solid black 2px;
 }

@@ -1,13 +1,13 @@
 import React from 'react'
+import AddNewPlayer from './AddNewPlayer'
 
 function AddSubForm() {
   return (
-    <form className='addSubForm'>
-        <p>Select Game</p>
-        <p>Select Team</p>
-        <p>Select a Player from the List</p>
-        <p>Add a New Player</p>
-    </form>
+    <div className='addSubForm'>
+        <p>Choose from remaining games, then choose the team.</p>
+        <p>Select a Player from the List to add to the subs list for that game</p>
+        <AddNewPlayer />
+    </div>
   )
 }
 
