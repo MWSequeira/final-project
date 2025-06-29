@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-
+import { useState } from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
 import GameSchedPage from './components/GameSchedPage'
@@ -8,6 +8,7 @@ import AddSubPage from './components/AddSubPage'
 
 
 function App() {
+  const[selectedTeam, setSelectedTeam] = useState(1)
 
   return (
     <>
