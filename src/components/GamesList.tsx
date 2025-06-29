@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react'
 
-type GameType = {
-  gameId: number
-  team1: string,
-  team2: number,
-  date: string,
-  time: string
-
-}
-
 function GamesList() {
 
   // data location

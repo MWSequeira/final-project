@@ -1,14 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 
-type TeamsType = {
-  teamId: number,
-  teamName: string
-}
 
 type TeamButtonProps = {
-  teams: [TeamsType],
-  setTeams: () => void,
   setSelectedTeam: (newValue: number) => void
 }
 
