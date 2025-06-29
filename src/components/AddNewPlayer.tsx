@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import type { PlayerType } from '../App'
 
 type AddNewPlayerProps = {
-  players: Array<PlayerType>,
-  setPlayers: (NewValue:PlayerType) => void,
+  allPlayers: Array<PlayerType>,
+  setAllPlayers: (NewValue:PlayerType) => void,
 }
 
-function AddNewPlayer( {players, setPlayers }: AddNewPlayerProps) {
+function AddNewPlayer( {allPlayers, setAllPlayers }: AddNewPlayerProps) {
   // data location
     const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
@@ -23,7 +23,7 @@ function AddNewPlayer( {players, setPlayers }: AddNewPlayerProps) {
       playerId: 500,
       teamId: 0 //all non-league players have a teamId of 0
     }
-    console.log(newPlayer)
+
   
     // useEffect controls the render and try-catch handles server no-response errors
     useEffect(() => {
@@ -44,7 +44,7 @@ function AddNewPlayer( {players, setPlayers }: AddNewPlayerProps) {
             setError("Error: " + response.statusText)
           } else {
             setPlayers([...players, newPlayer])
-  
+
           }   
         } catch(error: any) {
           setError("Error: " + error.message)

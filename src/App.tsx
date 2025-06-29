@@ -32,7 +32,7 @@ function App() {
   // pieces of state needed throughout the app
   const [selectedTeam, setSelectedTeam] = useState<[TeamsType]>([[0, "Select a Team"]])
   const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
-  const [players, setPlayers] = useState<[PlayerType]>([])
+  const [allPlayers, setAllPlayers] = useState<[PlayerType]>([])
 
   return (
     <>
