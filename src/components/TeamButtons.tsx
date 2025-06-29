@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 
 type TeamsType = {
-   team_id: number,
-   team_name: string
+  teamId: number,
+  teamName: string
 }
 
 type TeamButtonProps = {
+  teams: [TeamsType],
+  setTeams: () => void,
   setSelectedTeam: (newValue: number) => void
 }
 
@@ -15,7 +17,7 @@ function TeamButtons({setSelectedTeam}: TeamButtonProps) {
   const teamsBinUrl = "https://api.jsonbin.io/v3/b/686079348a456b7966b78eba"
 
   // three pieces of state to fetch data from the backend
-  const [teams, setTeams] = useState<[TeamsType]>([]) // data we're trying to load
+  const [teams, setTeams] = useState<[TeamsType]>([[0, "Select a Team"]]) // data to load
   const [loading, setLoading] = useState([]) // whether we're loading or not
   const [error, setError] = useState<null | string>() // whether we've run into an error
 
@@ -51,7 +53,7 @@ function TeamButtons({setSelectedTeam}: TeamButtonProps) {
 
   // select a different team
   const changeTeam = (idToSelect: number) => {
-    setSelectedTeam(teams.filter(team => team.team_id === idToSelect))
+    setSelectedTeam(teams.filter(team => team.teamId === idToSelect))
   }
 
   return (
@@ -61,7 +63,7 @@ function TeamButtons({setSelectedTeam}: TeamButtonProps) {
 
         <ButtonGroup aria-label="teams">
           {teams.map(team =>
-              <Button key={team.team_id} onClick={() => changeTeam(team.team_id)}>{team.team_name}</Button>)
+              <Button key={team.teamId} onClick={() => changeTeam(team.teamId)}>{team.teamName}</Button>)
           }
         </ButtonGroup>
     </>

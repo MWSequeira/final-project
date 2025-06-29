@@ -8,7 +8,8 @@ import AddSubPage from './components/AddSubPage'
 
 
 function App() {
-  const[selectedTeam, setSelectedTeam] = useState(1)
+  // pieces of state needed throughout the app
+  const [selectedTeam, setSelectedTeam] = useState<[TeamsType]>([[0, "Select a Team"]])
 
   return (
     <>

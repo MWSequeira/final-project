@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 
 type TeamsType = {
-  team_id: number,
-  team_name: string
+  teamId: number,
+  teamName: string
 }
 
 type PlayerType = {
-  first_name: string,
-  last_name: string,
+  firstName: string,
+  lastNMame: string,
   phone: string,
   position: string,
-  player_id: number,
-  team_id: number
+  playerId: number,
+  teamId: number
 }
 
 type PlayersDataProps = {
@@ -20,7 +20,7 @@ type PlayersDataProps = {
 
 function GetPlayersData( {selectedTeam}: PlayersDataProps) {
   // data location
-  const playersBinUrl = "https://api.jsonbin.io/v3/b/685f3beb8960c979a5b2b795"
+  const playersBinUrl = "https://api.jsonbin.io/v3/b/68616aea8a456b7966b81127"
 
   // three pieces of state to fetch data from the backend
   const [assignedPlayers, setAssignedPlayers] = useState<[PlayerType]>([]) // data we're trying to load
@@ -58,8 +58,8 @@ function GetPlayersData( {selectedTeam}: PlayersDataProps) {
     asyncFunction()
   }, [])
 
-  let currentTeamId = selectedTeam[0].team_id // only one element in this array
-  let displayList = assignedPlayers.filter(player => player.team_id === currentTeamId)
+  let currentTeamId = selectedTeam[0].teamId // only one element in this array
+  let displayList = assignedPlayers.filter(player => player.teamId === currentTeamId)
 
 
   // return the list of players
@@ -68,10 +68,8 @@ function GetPlayersData( {selectedTeam}: PlayersDataProps) {
         { loading && <p>Loading...</p> }
         { error && <p> {error}</p> }
         <h1>League Players</h1>
-        {displayList.map(item => <div key={item.player_id}>
-          {item.first_name} {item.last_name},   
-          {item.position},  team {item.team_id},  
-          {item.phone}
+        {displayList.map(item => <div key={item.playerId}>
+          <b>{item.firstName} {item.lastName}</b>, {item.position}, {item.phone}
         </div>)}
       </>
   )
