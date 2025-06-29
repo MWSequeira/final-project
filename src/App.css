@@ -44,7 +44,7 @@ body {
 }
 
 .teamPlayersList {
-  border: dotted orangered 5px;
+  background-color: lightgrey;
 }
 
 .gamesList {

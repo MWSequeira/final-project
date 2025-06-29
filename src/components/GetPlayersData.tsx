@@ -60,7 +60,7 @@ function GetPlayersData( {selectedTeam}: PlayersDataProps) {
 
   let currentTeamId = selectedTeam[0].team_id // only one element in this array
   let displayList = assignedPlayers.filter(player => player.team_id === currentTeamId)
-  console.log(displayList) 
+
 
   // return the list of players
   return (
