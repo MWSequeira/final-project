@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
 
-export type TeamsType = {
+type TeamsType = {
    team_id: number,
    team_name: string
 }
