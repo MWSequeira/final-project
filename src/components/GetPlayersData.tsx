@@ -58,9 +58,9 @@ function GetPlayersData( {selectedTeam}: PlayersDataProps) {
     asyncFunction()
   }, [])
 
-  // let currentTeamId = selectedTeam[0].team_id // only one element in this array
-  // console.log(selectedTeam)
-  //let displayList = assignedPlayers.filter(player => player.team_id === currentTeamId) 
+  let currentTeamId = selectedTeam[0].team_id // only one element in this array
+  let displayList = assignedPlayers.filter(player => player.team_id === currentTeamId)
+  console.log(displayList) 
 
   // return the list of players
   return (
@@ -68,7 +68,7 @@ function GetPlayersData( {selectedTeam}: PlayersDataProps) {
         { loading && <p>Loading...</p> }
         { error && <p> {error}</p> }
         <h1>League Players</h1>
-        {assignedPlayers.map(item => <div key={item.player_id}>
+        {displayList.map(item => <div key={item.player_id}>
           {item.first_name} {item.last_name},   
           {item.position},  team {item.team_id},  
           {item.phone}

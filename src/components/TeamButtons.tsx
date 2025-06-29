@@ -51,6 +51,7 @@ function TeamButtons({setSelectedTeam}: TeamButtonProps) {
 
   // select a different team
   const changeTeam = (idToSelect: number) => {
+    console.log(teams.filter(team => team.team_id === idToSelect))
     setSelectedTeam(teams.filter(team => team.team_id === idToSelect))
   }
 
