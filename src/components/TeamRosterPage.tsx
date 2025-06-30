@@ -9,7 +9,7 @@ type TeamRosterPageProps = {
   setSelectedTeam: (newValue:TeamsType) => void,
 }
 
-function TeamRosterPage( { TeamsButtoms, selectedTeam, setSelectedTeam }: TeamRosterPageProps) {
+function TeamRosterPage( { TeamsButtons, selectedTeam, setSelectedTeam }: TeamRosterPageProps) {
 
   return (
     <div className='teamRosterPage'>

@@ -1,16 +1,30 @@
 import AddSubForm from './AddSubForm'
+import { Col, Container, Row } from 'react-bootstrap'
 
 type AddSubPageProps = {
+  GamesList: () => void,
   GetAllPlayers: () => void
 }
 
 
-function AddSubPage({ GetAllPlayers }: AddSubPageProps) {
+function AddSubPage({ GamesList, GetAllPlayers }: AddSubPageProps) {
   return (
     <div className='addSubPage'>
-        <h1>Add a Sub</h1>
-        <AddSubForm />
-        <GetAllPlayers />
+      <Container>
+        <Row>
+          <h1>Add a Sub</h1>
+        </Row>
+        <Row>
+          <Col>
+          <AddSubForm 
+              GamesList={GamesList}/>
+
+          </Col>
+          <Col>
+            <GetAllPlayers />
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

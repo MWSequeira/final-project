@@ -7,7 +7,7 @@ type TeamsType = {
 
 type PlayerType = {
   firstName: string,
-  lastNMame: string,
+  lastName: string,
   phone: string,
   position: string,
   playerId: number,

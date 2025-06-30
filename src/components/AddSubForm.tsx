@@ -1,8 +1,9 @@
-import React from 'react'
-import AddNewPlayer from './AddNewPlayer'
-import GetAllPlayers from './GetAllPlayers'
+type AddSubFormProps = {
+  GamesList: () => void
+}
 
-function AddSubForm() {
+
+function AddSubForm( { GamesList }: AddSubFormProps) {
   return (
     <div className='addSubForm'>
         <p>Choose from remaining games, then choose the team.</p>
