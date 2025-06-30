@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import type { PlayerType } from '../App'
 
 
-function AddNewPlayer() {
+function AddNewPlayer( {}) {
     // data location
     const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   

@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
 import type { PlayerType } from '../App'
 
-function GetAllPlayers() {
+type GetAllPlayersProps = {
+  allPlayers: PlayerType[],
+  setAllPlayers: (newValue: PlayerType) => void
+}
+
+function GetAllPlayers( {allPlayers, setAllPlayers }: GetAllPlayersProps) {
  // data location
     const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
     // three pieces of state to fetch data from the backend
-    const [allPlayers, setAllPlayers] = useState<[PlayerType]>([]) // data we're trying to load
+    // data we're trying to load
     const [loading, setLoading] = useState([]) // whether we're loading or not
     const [error, setError] = useState<null | string>() // whether we've run into an error
   

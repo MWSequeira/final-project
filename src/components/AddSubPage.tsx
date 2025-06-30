@@ -1,14 +1,17 @@
+import { useState } from 'react'
 import AddSubForm from './AddSubForm'
 import { Col, Row } from 'react-bootstrap'
 
 type AddSubPageProps = {
-  gameSched: Array<GameType>,
-  GamesListPage: () => void,
   GetAllPlayers: () => void
 }
 
 
-function AddSubPage({ gameSched, GamesListPage, GetAllPlayers }: AddSubPageProps) {
+function AddSubPage({ GetAllPlayers }: AddSubPageProps) {
+  const [allPlayers, setAllPlayers] = useState<[PlayerType]>([])
+
+  {/* AddNewPlayers instead of GetAllPlayers and make it render all players */}
+
   return (
     <div className='addSubPage'>
         <Row>
@@ -16,10 +19,14 @@ function AddSubPage({ gameSched, GamesListPage, GetAllPlayers }: AddSubPageProps
         </Row>
         <Row>
           <Col>
-          <AddSubForm />
+          <AddSubForm 
+            allPlayers={allPlayers}
+            setAllPlayers={setAllPlayers}/>
           </Col>
           <Col>
-            <GetAllPlayers />
+            <GetAllPlayers 
+              allPlayers={allPlayers}
+              setAllPlayers={setAllPlayers} />
           </Col>
         </Row>
     </div>

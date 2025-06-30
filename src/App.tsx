@@ -60,7 +60,6 @@ function App() {
             setSelectedTeam={setSelectedTeam} />} />
         <Route path="/add-sub" 
           element={<AddSubPage 
-            GamesListPage={GamesListPage}
             GetAllPlayers={GetAllPlayers} />} />
       </Routes>
 
