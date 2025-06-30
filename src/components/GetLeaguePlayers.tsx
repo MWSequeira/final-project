@@ -18,7 +18,7 @@ type PlayersDataProps = {
   selectedTeam: Array<TeamsType>
 }
 
-function GetPlayersData( {selectedTeam}: PlayersDataProps) {
+function GetLeaguePlayers( {selectedTeam}: PlayersDataProps) {
   // data location
   const playersBinUrl = "https://api.jsonbin.io/v3/b/68616aea8a456b7966b81127"
 
@@ -68,10 +68,11 @@ function GetPlayersData( {selectedTeam}: PlayersDataProps) {
         { loading && <p>Loading...</p> }
         { error && <p> {error}</p> }
         <h1>League Players</h1>
+        <h3>{selectedTeam[0].teamName}</h3>
         {displayList.map(item => <div key={item.playerId}>
           <b>{item.firstName} {item.lastName}</b>, {item.position}, {item.phone}
         </div>)}
       </>
   )
 }
-export default GetPlayersData;
+export default GetLeaguePlayers;

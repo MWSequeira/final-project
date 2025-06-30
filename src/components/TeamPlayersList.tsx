@@ -1,5 +1,5 @@
 import React from 'react'
-import GetPlayersData from './GetPlayersData'
+import GetLeaguePlayers from './GetLeaguePlayers'
 import type { TeamsType } from './TeamButtons'
 
 type PlayersListProps = {
@@ -10,7 +10,7 @@ function TeamPlayersList( {selectedTeam}: PlayersListProps) {
 
   return (
     <div className='teamPlayersList'>
-        <GetPlayersData 
+        <GetLeaguePlayers 
           selectedTeam={selectedTeam}
         /> 
     </div>

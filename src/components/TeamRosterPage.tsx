@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import TeamButtons from './TeamButtons'
 import TeamPlayersList from './TeamPlayersList'
+import type { TeamsType } from '../App'
 
+type TeamRosterPageProps = {
+  TeamsButtons: (newValue:TeamsType) => void,
+  selectedTeam: TeamsType,
+  setSelectedTeam: (newValue:TeamsType) => void,
+}
 
-function TeamRosterPage() {
-  const[selectedTeam, setSelectedTeam] = useState([0, <div>Pick a Team to View</div>])
+function TeamRosterPage( { TeamsButtoms, selectedTeam, setSelectedTeam }: TeamRosterPageProps) {
 
   return (
     <div className='teamRosterPage'>

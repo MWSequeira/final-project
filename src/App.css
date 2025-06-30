@@ -29,6 +29,7 @@ body {
 
 .gameSchedPage {
   border: solid red 2px;
+  text-align: left;
 }
 
 .teamRosterPage {
@@ -57,4 +58,8 @@ body {
 
 .gameRosterPage {
   border: solid black 2px;
+}
+
+.getAllPlayers {
+  border: dotted yellowgreen 10px;
 }
