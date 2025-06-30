@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react'
+import type { GameType } from '../App'
 
-function GamesList() {
+type GamesListProps = {
+  gameSched: Array<GameType>,
+  setGameSched: (newValue:GameType) => void
+}
+
+function GamesList( { gameSched, setGameSched }: GamesListProps) {
 
   // data location
     const gamesBinUrl = "https://api.jsonbin.io/v3/b/68616bbd8a456b7966b8120e"
   
-    // three pieces of state to fetch data from the backend
-    const [gameSched, setGameSched] = useState<[GameType]>([]) // data we're trying to load
-    const [loading, setLoading] = useState([]) // whether we're loading or not
-    const [error, setError] = useState<null | string>() // whether we've run into an error
+    // three pieces of state to fetch data from the backend; gameSched was lifted up so it can be used in other components
+    const [loadingGames, setLoadingGames] = useState([]) // whether we're loading or not
+    const [errorGames, setErrorGames] = useState<null | string>() // whether we've run into an error
   
   
     // useEffect controls the render and try-catch handles server no-response errors
     useEffect(() => {
       const asyncFunction = async () => {
-        setLoading(true)
+        setLoadingGames(true)
         try {
           const response = await fetch(gamesBinUrl, {
             method: "GET",
@@ -26,7 +31,7 @@ function GamesList() {
           )
           // check for a bad response error
           if (!response.ok) {
-            setError("Error: " + response.statusText)
+            setErrorGames("Error: " + response.statusText)
           } else {
             const data:GameType = await response.json()
             const gameSchedArray = data[0]
@@ -34,12 +39,14 @@ function GamesList() {
   
           }   
         } catch(error: any) {
-          setError("Error: " + error.message)
+          setErrorGames("Error: " + error.message)
         }
-        setLoading(false)
+        setLoadingGames(false)
+        console.log("loading again")
+        console.log(gameSched)
       }
       asyncFunction()
-    }, [])
+    }, [gameSched])
   
     // let currentGameId = selectedGame[0].gameId // only one element in this array
     // let displayList = gameSched.filter(game => game.gameId === currentGameId)
@@ -47,8 +54,8 @@ function GamesList() {
 
   return (
     <div className="gamesList">
-      { loading && <p>Loading...</p> }
-      { error && <p> {error}</p> }
+      { loadingGames && <p>Loading...</p> }
+      { errorGames && <p> {errorGames}</p> }
 
       {gameSched.map(game => <div key={game.gameId}>
         <p>

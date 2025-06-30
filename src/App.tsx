@@ -39,9 +39,9 @@ export type GameType = {
 
 function App() {
   // pieces of state needed throughout the app
-   const[selectedTeam, setSelectedTeam] = useState([0, <div>Pick a Team to View</div>])
+  const[selectedTeam, setSelectedTeam] = useState([0, <div>Pick a Team to View</div>])
   const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
-  
+  const [gameSched, setGameSched] = useState<[GameType]>([]) // data we're trying to load
 
   return (
     <>
@@ -50,7 +50,9 @@ function App() {
       <Routes>
         <Route path="/" 
           element={<GameSchedPage 
-            GamesList={GamesList} />} />
+            GamesList={GamesList}
+            gameSched={gameSched}
+            setGameSched={setGameSched} />} />
         <Route path="/team-roster" 
           element={<TeamRosterPage 
             TeamsButtons={TeamButtons} 
