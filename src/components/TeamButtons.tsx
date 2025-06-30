@@ -57,7 +57,7 @@ function TeamButtons({setSelectedTeam}: TeamButtonProps) {
 
         <ButtonGroup aria-label="teams">
           {teams.map(team =>
-              <Button key={team.teamId} onClick={() => changeTeam(team.teamId)}>{team.teamName}</Button>)
+              <Button variant="outline-primary" key={team.teamId} onClick={() => changeTeam(team.teamId)}>{team.teamName}</Button>)
           }
         </ButtonGroup>
     </>

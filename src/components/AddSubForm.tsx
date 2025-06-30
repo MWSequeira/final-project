@@ -1,9 +1,4 @@
-type AddSubFormProps = {
-  GamesList: () => void
-}
-
-
-function AddSubForm( { GamesList }: AddSubFormProps) {
+function AddSubForm( ) {
   return (
     <div className='addSubForm'>
         <p>Choose from remaining games, then choose the team.</p>

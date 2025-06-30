@@ -3,10 +3,10 @@ import type { GameType } from '../App'
 
 type GamesListProps = {
   gameSched: Array<GameType>,
-  setGameSched: (newValue:GameType) => void
+  setGameSched: (newValue:GameType) => void,
 }
 
-function GamesList( { gameSched, setGameSched }: GamesListProps) {
+function GamesListPage( { gameSched, setGameSched  }: GamesListProps) {
 
   // data location
     const gamesBinUrl = "https://api.jsonbin.io/v3/b/68616bbd8a456b7966b8120e"
@@ -15,7 +15,7 @@ function GamesList( { gameSched, setGameSched }: GamesListProps) {
     const [loadingGames, setLoadingGames] = useState([]) // whether we're loading or not
     const [errorGames, setErrorGames] = useState<null | string>() // whether we've run into an error
   
-  
+
     // useEffect controls the render and try-catch handles server no-response errors
     useEffect(() => {
       const asyncFunction = async () => {
@@ -42,11 +42,9 @@ function GamesList( { gameSched, setGameSched }: GamesListProps) {
           setErrorGames("Error: " + error.message)
         }
         setLoadingGames(false)
-        console.log("loading again")
-        console.log(gameSched)
       }
       asyncFunction()
-    }, [gameSched])
+    }, [])
   
     // let currentGameId = selectedGame[0].gameId // only one element in this array
     // let displayList = gameSched.filter(game => game.gameId === currentGameId)
@@ -56,7 +54,8 @@ function GamesList( { gameSched, setGameSched }: GamesListProps) {
     <div className="gamesList">
       { loadingGames && <p>Loading...</p> }
       { errorGames && <p> {errorGames}</p> }
-
+      
+      <h1>Schedule of Games</h1>
       {gameSched.map(game => <div key={game.gameId}>
         <p>
         <b>Game {game.gameId}: </b>
@@ -73,4 +72,4 @@ function GamesList( { gameSched, setGameSched }: GamesListProps) {
   )
 }
 
-export default GamesList
+export default GamesListPage

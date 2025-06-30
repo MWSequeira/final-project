@@ -1,18 +1,20 @@
-import React from 'react'
+import { ButtonGroup, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 function NavBar() {
   return (
     <div>
+      <ButtonGroup aria-label="topNav">
         <Link to='/'>
-          <button>Games Schedule</button>
+          <Button variant="outline-primary">Games Schedule</Button>
         </Link>
         <Link to="/team-roster">
-          <button>Team Rosters</button>
+          <Button variant="outline-primary">Team Rosters</Button>
         </Link>
         <Link to="/add-sub">
-          <button>Add Subs</button>
+          <Button variant="outline-primary">Add Subs</Button>
         </Link>
+      </ButtonGroup>
     </div>
   )
 }

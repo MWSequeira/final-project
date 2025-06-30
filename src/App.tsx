@@ -1,18 +1,19 @@
 import { Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 // import styles
 import './App.css'
 
 // import pages and elements to appear on each page
 import NavBar from './components/NavBar'
-import GameSchedPage from './components/GameSchedPage'
+import GamesListPage from './components/GamesListPage'
 import TeamRosterPage from './components/TeamRosterPage'
 import AddSubPage from './components/AddSubPage'
 
 // import functions that create state for the entire app
 import GetAllPlayers from './components/GetAllPlayers'
-import GamesList from './components/GamesList'
+import GamesList from './components/GamesListPage'
 import TeamButtons from './components/TeamButtons'
 
 export type PlayerType = {
@@ -49,8 +50,7 @@ function App() {
 
       <Routes>
         <Route path="/" 
-          element={<GameSchedPage 
-            GamesList={GamesList}
+          element={<GamesListPage 
             gameSched={gameSched}
             setGameSched={setGameSched} />} />
         <Route path="/team-roster" 
@@ -60,7 +60,7 @@ function App() {
             setSelectedTeam={setSelectedTeam} />} />
         <Route path="/add-sub" 
           element={<AddSubPage 
-            GamesList={GamesList}
+            GamesListPage={GamesListPage}
             GetAllPlayers={GetAllPlayers} />} />
       </Routes>
 

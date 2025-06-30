@@ -9,7 +9,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: black;
+  color: darkgray;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,7 +33,7 @@ body {
 }
 
 .teamRosterPage {
-  border:solid violet 2px;
+  border:solid lightgray 2px;
 }
 
 .addSubPage {
@@ -42,10 +42,11 @@ body {
 
 .addSubForm {
   border: dotted green 5px;
+  margin: 2rem;
 }
 
 .teamPlayersList {
-  background-color: lightgrey;
+  border: lightgray 2px;
 }
 
 .gamesList {
@@ -61,5 +62,6 @@ body {
 }
 
 .getAllPlayers {
-  border: dotted yellowgreen 10px;
+  border: solid lightgray 2px;
+  margin: 2rem;
 }
