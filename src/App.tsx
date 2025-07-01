@@ -130,18 +130,18 @@ function App() {
 
   // GET ALL PLAYERS DATA
   // useEffect controls the render and try-catch handles server no-response errors
+  // useEffect controls the render and try-catch handles server no-response errors
   useEffect(() => {
     const asyncFunction = async () => {
       setLoadingPlayers(true)
       try {
-        const response = await fetch(allPlayersBinUrl, {
+        const response = await fetch(playersBinUrl, {
           method: "GET",
           headers: { // read the documentation for JSONBin.io to get the headers
             "X-Master-Key": MY_API_KEY,
             "X-Bin-Meta": false,
             "X-JSON-Path": "$..players"
-          },
-        }
+          }}
         )
         // check for a bad response error
         if (!response.ok) {
@@ -150,8 +150,7 @@ function App() {
           const data:PlayerType = await response.json()
           const allPlayerArray = data[0]
           setAllPlayers(allPlayerArray)
-          console.log("allPlayers")
-          console.log(allPlayers)
+
         }   
       } catch(error: any) {
         setErrorPlayers("Error: " + error.message)
