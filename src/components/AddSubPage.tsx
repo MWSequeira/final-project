@@ -2,15 +2,9 @@ import { useState } from 'react'
 import AddSubForm from './AddSubForm'
 import { Col, Row } from 'react-bootstrap'
 
-type AddSubPageProps = {
-  GetAllPlayers: () => void
-}
 
+function AddSubPage({  }: AddSubPageProps) {
 
-function AddSubPage({ GetAllPlayers }: AddSubPageProps) {
-  const [allPlayers, setAllPlayers] = useState<[PlayerType]>([])
-
-  {/* AddNewPlayers instead of GetAllPlayers and make it render all players */}
 
   return (
     <div className='addSubPage'>

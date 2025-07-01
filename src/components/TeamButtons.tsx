@@ -1,49 +1,18 @@
-import { useEffect, useState } from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
+import type { TeamsType } from '../App'
 
 
 type TeamButtonProps = {
+  teams: TeamsType,
+  loadingTeams: boolean,
+  errorTeams:string,
   setSelectedTeam: (newValue: number) => void
 }
 
-function TeamButtons({setSelectedTeam}: TeamButtonProps) {
-  // data location
-  const teamsBinUrl = "https://api.jsonbin.io/v3/b/686079348a456b7966b78eba"
-
-  // three pieces of state to fetch data from the backend
-  const [teams, setTeams] = useState<[TeamsType]>([[0, "Select a Team"]]) // data to load
-  const [loading, setLoading] = useState([]) // whether we're loading or not
-  const [error, setError] = useState<null | string>() // whether we've run into an error
-
-  // useEffect controls the render and try-catch handles server no-response errors
-  useEffect(() => {
-    const asyncFunction = async () => {
-      setLoading(true)
-      try {
-        const response = await fetch(teamsBinUrl, {
-          method: "GET",
-          headers: { // read the documentation for JSONBin.io to get the headers
-            "X-Master-Key": MY_API_KEY,
-            "X-Bin-Meta": false,
-            "X-JSON-Path": "$..teams"
-          }}
-        )
-        // check for a bad response error
-        if (!response.ok) {
-          setError("Error: " + response.statusText)
-        } else {
-          const data:TeamsType = await response.json()
-          const teamsArray = data[0]
-          setTeams(teamsArray)
-
-        }   
-      } catch(error: any) {
-        setError("Error: " + error.message)
-      }
-      setLoading(false)
-    }
-    asyncFunction()
-  }, [])
+function TeamButtons({ teams,
+  loadingTeams,
+  errorTeams,
+  setSelectedTeam}: TeamButtonProps) {
 
   // select a different team
   const changeTeam = (idToSelect: number) => {
@@ -52,8 +21,8 @@ function TeamButtons({setSelectedTeam}: TeamButtonProps) {
 
   return (
     <>
-      { loading && <p>Loading...</p> }
-      { error && <p> {error}</p> }
+      { loadingTeams && <p>Loading...</p> }
+      { errorTeams && <p> {errorTeams}</p> }
 
         <ButtonGroup aria-label="teams">
           {teams.map(team =>
