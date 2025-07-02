@@ -26,7 +26,7 @@ export type TeamsType = {
 }
 
 export type GameType = {
-  gameId: number
+  gameId: number,
   team1: string,
   team2: string,
   date: string,
