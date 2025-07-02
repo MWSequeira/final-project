@@ -11,11 +11,6 @@ import GamesListPage from './components/GamesListPage'
 import TeamRosterPage from './components/TeamRosterPage'
 import AddSubPage from './components/AddSubPage'
 
-// import functions that create state for the entire app
-import GetAllPlayers from './components/GetAllPlayers'
-import GamesList from './components/GamesListPage'
-import TeamButtons from './components/TeamButtons'
-
 export type PlayerType = {
   firstName: string,
   lastName: string,
@@ -85,8 +80,6 @@ function App() {
           const data:GameType = await response.json()
           const gameSchedArray = data[0]
           setGameSched(gameSchedArray)
-          console.log("GameSched")
-          console.log(gameSched)
         }   
       } catch(error: any) {
         setErrorGames("Error: " + error.message)
@@ -135,7 +128,7 @@ function App() {
     const asyncFunction = async () => {
       setLoadingPlayers(true)
       try {
-        const response = await fetch(playersBinUrl, {
+        const response = await fetch(allPlayersBinUrl, {
           method: "GET",
           headers: { // read the documentation for JSONBin.io to get the headers
             "X-Master-Key": MY_API_KEY,
@@ -171,6 +164,8 @@ function App() {
             gameSched={gameSched}
             loadingGames={loadingGames}
             errorGames={errorGames}
+            selectedGame={selectedGame}
+            setSelectedGame={setSelectedGame}
           />} />
         <Route path="/team-roster" 
           element={<TeamRosterPage 
@@ -180,6 +175,7 @@ function App() {
             allPlayers={allPlayers}
             loadingPlayers={loadingPlayers}
             errorPlayers={errorPlayers}
+            gameSched={gameSched}
             selectedGame={selectedGame}
             setSelectedGame={setSelectedGame}
             selectedTeam={selectedTeam}

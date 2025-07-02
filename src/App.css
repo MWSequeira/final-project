@@ -52,6 +52,7 @@ body {
 
 .gamesList {
   border: dotted green 5px;
+  text-align: left;
 }
 
 .addNewPlayer {
