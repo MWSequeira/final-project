@@ -29,6 +29,12 @@ function TeamRosterPage( { teams,
   selectedTeam, 
   setSelectedTeam }: TeamRosterPageProps) {
 
+  // select a game
+  const selectGame = (idToSelect: number) => {
+    setSelectedGame(gameSched.filter(game => game.gameId === idToSelect))
+    console.log(idToSelect)
+  }
+
 
   // const team1Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame[0].team1)
   // const team2Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame[0].team2)
@@ -38,7 +44,7 @@ function TeamRosterPage( { teams,
     <div className='teamRosterPage'>
       <Container>
         <Row>
-          Heading Here
+          Get Game info -- maybe a modal to see the games?
         </Row>
         <Row>
           <Col>
