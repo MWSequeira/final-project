@@ -1,12 +1,21 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import type { GameType, PlayerType } from '../App'
 
-function GameDetails({ gameSched, allPlayers}) {
+type GameDetailsProps ={
+    gameSched: GameType[],
+    allPlayer: PlayerType[],
+    selectedGame: GameType[],
+    setSelectedGame: (newValue: GameType) => void
+}
+
+function GameDetails({ gameSched, 
+    allPlayers,
+    selectedGame,
+    setSelectedGame}) {
 
     const { gameId } = useParams()
 
-    const currentGame = gameSched.filter(game => game.gameId === gameId)
-    console.log(currentGame)
 
   return (
     <div>

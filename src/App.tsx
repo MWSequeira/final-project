@@ -188,6 +188,8 @@ function App() {
           element={<GameDetails 
           gameSched={gameSched}
           allPlayers={allPlayers} 
+          selectedGame={selectedGame}
+          setSelectedGame={setSelectedGame}
           />} />
       </Routes>
 
