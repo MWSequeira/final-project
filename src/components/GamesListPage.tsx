@@ -17,8 +17,6 @@ function GamesListPage( {gameSched,
   selectedGame,
   setSelectedGame}: GamesListProps) {
 
-    // use NavLink t
-
   return (
     <div className="gamesList">
       { loadingGames && <p>Loading...</p> }
