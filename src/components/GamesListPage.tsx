@@ -6,16 +6,12 @@ import { Link } from 'react-router-dom'
 type GamesListProps = {
   gameSched: GameType[],
   loadingGames: boolean,
-  errorGames: string,
-  selectedGame: GameType[],
-  setSelectedGame: (newValue: number) => void
+  errorGames: string
 }
 
 function GamesListPage( {gameSched,
   loadingGames,
-  errorGames,
-  selectedGame,
-  setSelectedGame}: GamesListProps) {
+  errorGames}: GamesListProps) {
 
   return (
     <div className="gamesList">

@@ -1,8 +1,5 @@
-import TeamButtons from './TeamButtons'
-import TeamPlayersList from './TeamPlayersList'
 import type { GameType, PlayerType, TeamsType } from '../App'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Form } from 'react-bootstrap'
 
 type TeamRosterPageProps = {
   teams: TeamsType[],

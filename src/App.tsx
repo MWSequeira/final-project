@@ -8,7 +8,7 @@ import './App.css'
 // import pages and elements to appear on each page
 import NavBar from './components/NavBar'
 import GamesListPage from './components/GamesListPage'
-import TeamRosterPage from './components/TeamRosterPage'
+import TeamRosterPage from './components-not-used/TeamRosterPage'
 import AddSubPage from './components/AddSubPage'
 import GameDetails from './components/GameDetails'
 
@@ -90,35 +90,35 @@ function App() {
     asyncFunction()
   }, [])
 
-  // // GET TEAMS DATA
-  // // useEffect controls the render and try-catch handles server no-response errors
-  // useEffect(() => {
-  //   const asyncFunction = async () => {
-  //     setLoadingTeams(true)
-  //     try {
-  //       const response = await fetch(teamsBinUrl, {
-  //         method: "GET",
-  //         headers: { // read the documentation for JSONBin.io to get the headers
-  //           "X-Master-Key": MY_API_KEY,
-  //           "X-Bin-Meta": false,
-  //           "X-JSON-Path": "$..teams"
-  //         }}
-  //       )
-  //       // check for a bad response error
-  //       if (!response.ok) {
-  //         setErrorTeams("Error: " + response.statusText)
-  //       } else {
-  //         const data:TeamsType = await response.json()
-  //         const teamsArray = data[0]
-  //         setTeams(teamsArray)
-  //       }   
-  //     } catch(error: any) {
-  //       setErrorTeams("Error: " + error.message)
-  //     }
-  //     setLoadingTeams(false)
-  //   }
-  //   asyncFunction()
-  // }, [])
+  // GET TEAMS DATA
+  // useEffect controls the render and try-catch handles server no-response errors
+  useEffect(() => {
+    const asyncFunction = async () => {
+      setLoadingTeams(true)
+      try {
+        const response = await fetch(teamsBinUrl, {
+          method: "GET",
+          headers: { // read the documentation for JSONBin.io to get the headers
+            "X-Master-Key": MY_API_KEY,
+            "X-Bin-Meta": false,
+            "X-JSON-Path": "$..teams"
+          }}
+        )
+        // check for a bad response error
+        if (!response.ok) {
+          setErrorTeams("Error: " + response.statusText)
+        } else {
+          const data:TeamsType = await response.json()
+          const teamsArray = data[0]
+          setTeams(teamsArray)
+        }   
+      } catch(error: any) {
+        setErrorTeams("Error: " + error.message)
+      }
+      setLoadingTeams(false)
+    }
+    asyncFunction()
+  }, [])
 
   // GET ALL PLAYERS DATA
   // useEffect controls the render and try-catch handles server no-response errors
@@ -152,7 +152,6 @@ function App() {
     asyncFunction()
   }, [])
 
-
   return (
     <>
       <NavBar />
@@ -181,10 +180,14 @@ function App() {
             setSelectedTeam={setSelectedTeam}
           />} />
         <Route path="/add-sub" 
-          element={<AddSubPage />} />
+          element={<AddSubPage 
+            gameSched={gameSched}
+            allPlayers={allPlayers} 
+          />} />
         <Route path="/games/:gameId"
           element={<GameDetails 
           gameSched={gameSched}
+          teams={teams}
           allPlayers={allPlayers} 
           selectedGame={selectedGame}
           setSelectedGame={setSelectedGame}
