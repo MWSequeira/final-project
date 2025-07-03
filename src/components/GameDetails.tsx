@@ -19,6 +19,9 @@ function GameDetails({ gameSched,
     let chosenGame = parseInt(gameId) // gameId is passed as a string; the prop is a number
     setSelectedGame(gameSched.find(game => game.gameId === chosenGame))
 
+    let team1Roster = allPlayers.filter(player => player.teamName === selectedGame.team1)
+    let team2Roster = allPlayers.filter(player => player.teamName === selectedGame.team2)
+
   return (
     <div>
         <Container>
@@ -28,11 +31,15 @@ function GameDetails({ gameSched,
             <Row>
                 <Col>
                     <h3>{selectedGame.team1}</h3>
-                    <p>roster here</p>
+                    {team1Roster.map(player => <p>
+                        {player.firstName} {player.lastName}, {player.position}
+                    </p>)}
                 </Col>
                 <Col>
                     <h3>{selectedGame.team2}</h3>
-                    <p>roster here</p>
+                    {team2Roster.map(player => <p>
+                        {player.firstName} {player.lastName}, {player.position}
+                    </p>)}
                 </Col>
             </Row>
         </Container>

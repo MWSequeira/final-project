@@ -90,37 +90,35 @@ function App() {
     asyncFunction()
   }, [])
 
-  // GET TEAMS DATA
-  // useEffect controls the render and try-catch handles server no-response errors
-  useEffect(() => {
-    const asyncFunction = async () => {
-      setLoadingTeams(true)
-      try {
-        const response = await fetch(teamsBinUrl, {
-          method: "GET",
-          headers: { // read the documentation for JSONBin.io to get the headers
-            "X-Master-Key": MY_API_KEY,
-            "X-Bin-Meta": false,
-            "X-JSON-Path": "$..teams"
-          }}
-        )
-        // check for a bad response error
-        if (!response.ok) {
-          setErrorTeams("Error: " + response.statusText)
-        } else {
-          const data:TeamsType = await response.json()
-          const teamsArray = data[0]
-          setTeams(teamsArray)
-          console.log("teams")
-          console.log(teams)
-        }   
-      } catch(error: any) {
-        setErrorTeams("Error: " + error.message)
-      }
-      setLoadingTeams(false)
-    }
-    asyncFunction()
-  }, [])
+  // // GET TEAMS DATA
+  // // useEffect controls the render and try-catch handles server no-response errors
+  // useEffect(() => {
+  //   const asyncFunction = async () => {
+  //     setLoadingTeams(true)
+  //     try {
+  //       const response = await fetch(teamsBinUrl, {
+  //         method: "GET",
+  //         headers: { // read the documentation for JSONBin.io to get the headers
+  //           "X-Master-Key": MY_API_KEY,
+  //           "X-Bin-Meta": false,
+  //           "X-JSON-Path": "$..teams"
+  //         }}
+  //       )
+  //       // check for a bad response error
+  //       if (!response.ok) {
+  //         setErrorTeams("Error: " + response.statusText)
+  //       } else {
+  //         const data:TeamsType = await response.json()
+  //         const teamsArray = data[0]
+  //         setTeams(teamsArray)
+  //       }   
+  //     } catch(error: any) {
+  //       setErrorTeams("Error: " + error.message)
+  //     }
+  //     setLoadingTeams(false)
+  //   }
+  //   asyncFunction()
+  // }, [])
 
   // GET ALL PLAYERS DATA
   // useEffect controls the render and try-catch handles server no-response errors
