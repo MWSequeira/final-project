@@ -10,6 +10,7 @@ import NavBar from './components/NavBar'
 import GamesListPage from './components/GamesListPage'
 import TeamRosterPage from './components/TeamRosterPage'
 import AddSubPage from './components/AddSubPage'
+import GameDetails from './components/GameDetails'
 
 export type PlayerType = {
   firstName: string,
@@ -183,6 +184,11 @@ function App() {
           />} />
         <Route path="/add-sub" 
           element={<AddSubPage />} />
+        <Route path="/games/:gameId"
+          element={<GameDetails 
+          gameSched={gameSched}
+          allPlayers={allPlayers} 
+          />} />
       </Routes>
 
     </>
