@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import type { GameType, PlayerType } from '../App'
+import type { GameType, PlayerType } from './ExportTypes'
 import DisplayGames from './DisplayGames'
 
 type GameDetailsProps ={

@@ -12,28 +12,8 @@ import TeamRosterPage from './components-not-used/TeamRosterPage'
 import AddSubPage from './components/AddSubPage'
 import GameDetails from './components/GameDetails'
 
-export type PlayerType = {
-  firstName: string,
-  lastName: string,
-  phone: string,
-  position: string,
-  playerId: number,
-  teamName: string,
-  playerHistory: number[]
-}
-
-export type TeamsType = {
-  teamId: number,
-  teamName: string
-}
-
-export type GameType = {
-  gameId: number,
-  team1: string,
-  team2: string,
-  date: string,
-  time: string
-}
+// import types
+import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
 
 function App() {
   // data locations

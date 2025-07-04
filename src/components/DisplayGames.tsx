@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import type { GameType, PlayerType } from '../App'
+import type { GameType, PlayerType } from './ExportTypes'
 
 type DisplayGamesProps = {
     allPlayers: PlayerType[],

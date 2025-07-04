@@ -2,7 +2,7 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useState, type ChangeEvent } from 'react'
 import { Modal } from 'react-bootstrap'
-import type { GameType, PlayerType } from '../App'
+import type { GameType, PlayerType } from './ExportTypes'
 
 
 type AddSubPageProps = {

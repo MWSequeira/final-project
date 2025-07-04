@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react'
-import type { GameType } from '../App'
-import { Button } from 'react-bootstrap'
+import type { GameType } from './ExportTypes'
 import { Link } from 'react-router-dom'
 
 type GamesListProps = {
