@@ -1,6 +1,8 @@
-import type { GameType, PlayerType } from '../App'
 import { Container, Col, Row } from 'react-bootstrap'
-import { Form, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { useState } from 'react'
+import type { GameType, PlayerType } from '../App'
+
 
 type AddSubPageProps = {
   gameSched: GameType[],
@@ -9,9 +11,14 @@ type AddSubPageProps = {
 
 function AddSubPage( { gameSched, allPlayers }: AddSubPageProps) {
 
-  const chooseGame = (MouseEvent:HTMLButtonElement) => {
-    console.log("Game Chosen")
+  const [formValues, setFormValues] = useState({
+    gameId: Number,
+    playerId: Number
+  })
+
+  const handleSubmit = (gameId, playerId) => {
     console.log(gameId)
+    console.log(playerId)
   }
 
   return (
@@ -26,38 +33,37 @@ function AddSubPage( { gameSched, allPlayers }: AddSubPageProps) {
         <Row>
           <Col>
             <h2>Games</h2>
-            <p><b>Choose Game:</b></p>
-            {gameSched.map(game => <div key={game.gameId}>
-              <p><Button>Game {game.gameId}</Button> {game.date} at {game.time}</p>
-            </div>)}
+            <form>
+              <div class="form-group">
+                <label for="getGame">Choose a Game</label>
+                <select class="form-control"
+                  id="getGame"
+                  value={formValues.gameId}>
+                    {gameSched.map(game => <option key={game.gameId}>
+                      Game {game.gameId} on {game.date} at {game.time}</option>
+                    )}
+                </select>
+              </div>
+            </form>
           </Col>
           <Col>
             <h2>Add a Sub</h2>
-            <p><b>Choose from the list below</b></p>
-              {allPlayers.map(player => <p>
-                {player.firstName} {player.lastName}, {player.position}
-              </p>)}
+            <form>
+              <div class="form-group">
+                <label for="getPlayer">Choose a Player</label>
+                <select class="form-control" 
+                  id="getPlayer"
+                  value={formValues.playerId}>
+                    {allPlayers.map(player => <option key={player.playerId}>
+                      {player.firstName} {player.lastName}, {player.position}
+                    </option>)}
+                </select>
+              </div>
+            </form>
           </Col>
-          <Col>
-                <Form>
-                  {['checkbox', 'radio'].map((type) => (
-                    <div key={`default-${type}`} className="mb-3">
-                      <Form.Check // prettier-ignore
-                        type={type}
-                        id={`game-${type}`}
-                        label={`game ${type}`}
-                      />
-
-                      <Form.Check
-                        disabled
-                        type={type}
-                        label={`disabled ${type}`}
-                        id={`disabled-default-${type}`}
-                      />
-                    </div>
-                  ))}
-                </Form>
-          </Col>
+        </Row>
+        <Row>
+          <Button variant="outline-primary" onClick={handleSubmit}>Submit</Button>
         </Row>
 
       </Container>
