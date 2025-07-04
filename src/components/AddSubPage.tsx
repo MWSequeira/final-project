@@ -11,17 +11,17 @@ type AddSubPageProps = {
   gameSched: GameType[],
   selectedGame: GameType[],
   allPlayers: PlayerType[],
-  loadingPlayers: boolean;
-  errorPlayers: null | string,
-  setAllPlayers: (newValue: PlayerType) => void
+  setAllPlayers: (newValue: PlayerType) => void,
+  allHistories: Array<number>,
+  setAllHistories: (newValue: Array<number>) => void,
 }
 
 function AddSubPage( { gameSched,
   selectedGame,
   allPlayers,
-  loadingPlayers,
-  errorPlayers,
-  setAllPlayers }: AddSubPageProps) {
+  setAllPlayers,
+  allHistories,
+  setAllHistories }: AddSubPageProps) {
 
 
   // state variables for the form -- in progress values
@@ -47,7 +47,7 @@ function AddSubPage( { gameSched,
     })
 
 
-  const handleFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {87
     event.preventDefault() // to keep the page from refreshing
     let playerIdNo = parseInt(formValues.playerId) // values from the form are strings
     let chosenSub:PlayerType[] = allPlayers.filter(player => player.playerId === playerIdNo) // get the player object within the allPlayes array
@@ -62,6 +62,14 @@ function AddSubPage( { gameSched,
       ...player,
       playerHistory: historyCopy
     })))
+
+    // next, update the allHistories state so that the allPlayers data will load to the backend
+    // let allHistoriesUpdateArray = []
+    //   for (let i = 0; i < allPlayers.length; i++) {
+    //     allHistoriesUpdateArray.push(allPlayers[i].playerHistory)
+    //   }
+    // setAllHistories(allHistoriesUpdateArray)
+    // console.log(allHistories)
 
     // close the Modal
     setShow(false)

@@ -132,6 +132,54 @@ function App() {
     asyncFunction()
   }, [])
 
+  // UPDATE THE BACKEND WHEN NEEDED
+  // first, destructure the players' history arrays to create a state for the dependency array
+  let allHistoriesArray = []
+  for (let i = 0; i < allPlayers.length; i++) {
+    allHistoriesArray.push(allPlayers[i].playerHistory)
+  }
+  const[allHistories, setAllHistories] = useState(allHistoriesArray)
+  console.log(allHistoriesArray)
+  console.log(allHistories)
+
+
+  // next, use the useEffect hook with a PUT to update the backend
+  // create the other two pieces of state needed for loading and error
+  const [loadingHistories, setLoadingHistories] = useState([]) // whether we're loading or not
+  const [errorHistories, setErrorHistories] = useState<null | string>() // whether we've run into an error
+  // useEffect controls the render and try-catch handles server no-response errors
+  useEffect(() => {
+    const asyncFunction = async () => {
+      setLoadingHistories(true)
+      try {
+        const response = await fetch(allPlayersBinUrl, {
+          method: "PUT",
+          headers: { // read the documentation for JSONBin.io to get the headers
+            "Content-Type": "application/json",
+            "X-Master-Key": MY_API_KEY,
+            // "X-Bin-Meta": false,
+            // "X-JSON-Path": "$..players"
+          },
+          body: JSON.stringify([...allPlayers, newPlayer]) // must match "Content-Type"
+        }
+        )
+        // check for a bad response error
+        if (!response.ok) {
+          setErrorHistories("Error: " + response.statusText)
+        } else {
+          // const data:PlayerType = await response.json()
+          // const allPlayerArray = data[0]
+          // setAllPlayers(allPlayerArray)
+          
+        }   
+      } catch(error: any) {
+        setErrorHistories("Error: " + error.message)
+      }
+      setLoadingHistories(false)
+      console.log("updating backend")
+    }
+    asyncFunction()
+  }, [allHistories])
 
   return (
     <>
@@ -168,6 +216,8 @@ function App() {
             loadingPlayers={loadingPlayers}
             errorPlayers={errorPlayers}
             setAllPlayers={setAllPlayers}
+            allHistories={allHistories}
+            setAllHistories={setAllHistories}
           />} />
         <Route path="/games/:gameId"
           element={<GameDetails 
