@@ -132,6 +132,7 @@ function App() {
     asyncFunction()
   }, [])
 
+
   return (
     <>
       <NavBar />
@@ -164,6 +165,8 @@ function App() {
             gameSched={gameSched}
             selectedGame={selectedGame}
             allPlayers={allPlayers} 
+            loadingPlayers={loadingPlayers}
+            errorPlayers={errorPlayers}
             setAllPlayers={setAllPlayers}
           />} />
         <Route path="/games/:gameId"

@@ -1,21 +1,26 @@
 import { Container, Col, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useState, type ChangeEvent } from 'react'
+import { useEffect } from 'react'
 import { Modal } from 'react-bootstrap'
 import type { GameType, PlayerType } from './ExportTypes'
-import AddNewPlayer from './UpdatePlayer'
+
 
 
 type AddSubPageProps = {
   gameSched: GameType[],
   selectedGame: GameType[],
   allPlayers: PlayerType[],
-  setAllPlayers: (newValue: PlayerType) => void,
+  loadingPlayers: boolean;
+  errorPlayers: null | string,
+  setAllPlayers: (newValue: PlayerType) => void
 }
 
 function AddSubPage( { gameSched,
   selectedGame,
   allPlayers,
+  loadingPlayers,
+  errorPlayers,
   setAllPlayers }: AddSubPageProps) {
 
 
@@ -57,7 +62,6 @@ function AddSubPage( { gameSched,
       ...player,
       playerHistory: historyCopy
     })))
-
 
     // close the Modal
     setShow(false)
@@ -113,6 +117,7 @@ function AddSubPage( { gameSched,
                     <Button variant="success" onClick={handleFormSubmit}>
                         Add Player
                     </Button>
+                
                 </Modal.Footer>
 
             </Modal>

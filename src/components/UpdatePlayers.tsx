@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react'
 import type { PlayerType } from './ExportTypes'
 import type { GameType } from './ExportTypes'
 
-type UpdatePlayerProps = {
+type UpdatePlayersProps = {
   allPlayers: PlayerType[],
   loadingPlayers: boolean,
   errorPlayers: null | string,
   selectedGame: GameType[],
 }
 
-function UpdatePlayer( { allPlayers, 
+function UpdatePlayers( { allPlayers, 
   loadingPlayers, 
   errorPlayers, 
-  selectedGame }: UpdatePlayerProps) {
+  selectedGame }: UpdatePlayersProps) {
     
     // data location -- happens to be the same as in the App component
     const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
@@ -61,4 +61,4 @@ function UpdatePlayer( { allPlayers,
   )
 }
 
-export default UpdatePlayer
+export default UpdatePlayers
