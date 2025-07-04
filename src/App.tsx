@@ -18,7 +18,8 @@ export type PlayerType = {
   phone: string,
   position: string,
   playerId: number,
-  teamId: number
+  teamName: string,
+  playerHistory: number[]
 }
 
 export type TeamsType = {
@@ -182,6 +183,7 @@ function App() {
         <Route path="/add-sub" 
           element={<AddSubPage 
             gameSched={gameSched}
+            selectedGame={selectedGame}
             allPlayers={allPlayers} 
             setAllPlayers={setAllPlayers}
           />} />

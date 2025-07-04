@@ -7,13 +7,16 @@ import type { GameType, PlayerType } from '../App'
 
 type AddSubPageProps = {
   gameSched: GameType[],
+  selectedGame: GameType[],
   allPlayers: PlayerType[],
   setAllPlayers: (newValue: PlayerType) => void,
 }
 
 function AddSubPage( { gameSched,
+  selectedGame,
   allPlayers,
   setAllPlayers }: AddSubPageProps) {
+
 
   // state variables for the form -- in progress values
   const[formValues, setFormValues] = useState({
@@ -22,8 +25,9 @@ function AddSubPage( { gameSched,
   })
 
   // small functions for this component
+  console.log(selectedGame.team1)
+
   let findPlayer = (playerId) => allPlayers.find(player => player.playerId === playerId) // get a particular player
-  
   let updatedPlayerHistory = (playerId, gameId) => findPlayer(playerId).playerHistory[gameId-1] = 5
 
 
@@ -44,13 +48,6 @@ function AddSubPage( { gameSched,
     event.preventDefault() // to keep the page from refreshing
     let gameId = parseInt(formValues.gameId) // values from the form are strings
     let playerId = parseInt(formValues.playerId) // values from the form are strings
-    console.log(gameId)
-    console.log(playerId)
-    console.log(findPlayer(playerId))
-    console.log(findPlayer(playerId).playerHistory)
-    
-    console.log(findPlayer(playerId).playerHistory[gameId]) 
-    console.log(updatedPlayerHistory(playerId, gameId))
 }
 
 
@@ -61,21 +58,18 @@ function AddSubPage( { gameSched,
       <Container>
         <Row>
         <Button variant="outline-primary" onClick={handleShow}>
-                Add a Sub
+                Add a Sub to Game {selectedGame.gameId}
         </Button>
         </Row>
         <Row>
           <Col>
-            <h2>Games</h2>
-            {gameSched.map(game => <div key={game.gameId}>
-              <p>
-              <b>Game {game.gameId}</b> on {game.date} at {game.time} &mdash; <b>{game.team1}</b> vs <b>{game.team2}</b>
-              </p>
-            </div>)}
+            <h2>Game {selectedGame.gameId}</h2>
+            {selectedGame.date} at {selectedGame.time} <br />
+            {selectedGame.team1} vs {selectedGame.team2}
           </Col>
           <Col>
             <h2>Add a Sub</h2>
-            {allPlayers.map(player => <p>
+            {availPlayers.map(player => <p>
                 {player.playerId} &mdash; {player.firstName} {player.lastName}, {player.position}
             </p>)}
           </Col>
