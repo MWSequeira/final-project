@@ -11,8 +11,8 @@ function NavBar() {
         <Link to="/add-sub">
           <Button variant="outline-primary">Add Subs</Button>
         </Link>
-        <Link to="/team-roster">
-          <Button variant="outline-primary">Team Rosters</Button>
+        <Link to="/player-schedule">
+          <Button variant="outline-primary">Player Schedule</Button>
         </Link>
       </ButtonGroup>
     </div>

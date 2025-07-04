@@ -8,9 +8,9 @@ import './App.css'
 // import pages and elements to appear on each page
 import NavBar from './components/NavBar'
 import GamesListPage from './components/GamesListPage'
-import TeamRosterPage from './components-not-used/TeamRosterPage'
 import AddSubPage from './components/AddSubPage'
 import GameDetails from './components/GameDetails'
+import PlayerSchedPage from './components/PlayerSchedPage'
 
 // import types
 import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
@@ -22,7 +22,6 @@ function App() {
   const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
   // pieces of state needed throughout the app
-  const [selectedTeam, setSelectedTeam] = useState([0, <div>Pick a Team to View</div>])
   const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
   const [changedHistory, setChangedHistory] = useState(false)
 
@@ -135,6 +134,7 @@ function App() {
 
   // UPDATE THE PLAYER DATA ON THE BACKEND WHEN NEEDED
   // create the other two pieces of state needed for loading and error
+  console.log(changedHistory)
   if (changedHistory === true) {
     const [loadingHistories, setLoadingHistories] = useState([]) // whether we're loading or not
     const [errorHistories, setErrorHistories] = useState<null | string>() // whether we've run into an error
@@ -187,20 +187,6 @@ function App() {
             selectedGame={selectedGame}
             setSelectedGame={setSelectedGame}
           />} />
-        <Route path="/team-roster" 
-          element={<TeamRosterPage 
-            teams={teams}
-            loadingTeams={loadingTeams}
-            errorTeams={errorTeams}
-            allPlayers={allPlayers}
-            loadingPlayers={loadingPlayers}
-            errorPlayers={errorPlayers}
-            gameSched={gameSched}
-            selectedGame={selectedGame}
-            setSelectedGame={setSelectedGame}
-            selectedTeam={selectedTeam}
-            setSelectedTeam={setSelectedTeam}
-          />} />
         <Route path="/add-sub" 
           element={<AddSubPage 
             gameSched={gameSched}
@@ -220,6 +206,9 @@ function App() {
           selectedGame={selectedGame}
           setSelectedGame={setSelectedGame}
           />} />
+        <Route path="/player-schedule" 
+          element={<PlayerSchedPage />}
+        />
       </Routes>
 
     </>

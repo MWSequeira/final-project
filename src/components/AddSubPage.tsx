@@ -1,29 +1,25 @@
 import { Container, Col, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useState, type ChangeEvent } from 'react'
-import { useEffect } from 'react'
 import { Modal } from 'react-bootstrap'
 import type { GameType, PlayerType } from './ExportTypes'
 
-
-
 type AddSubPageProps = {
-  gameSched: GameType[],
   selectedGame: GameType[],
   allPlayers: PlayerType[],
   setAllPlayers: (newValue: PlayerType) => void,
   changedHistory: boolean,
-  setChangedHistory: (newValue:boolean) => void
+  setChangedHistory: (newValue) => void
 }
 
-function AddSubPage( { gameSched,
-  selectedGame,
+function AddSubPage( { selectedGame,
   allPlayers,
   setAllPlayers,
   changedHistory,
   setChangedHistory
    }: AddSubPageProps) {
 
+    console.log(changedHistory)
 
   // state variables for the form -- in progress values
   const[formValues, setFormValues] = useState({
@@ -62,14 +58,16 @@ function AddSubPage( { gameSched,
       player.playerId !== playerIdNo ? player: {
       ...player, playerHistory: historyCopy }
     )))
-
-    // close the Modal
-    setShow(false)
-    
     //trigger an update to the backend
     setChangedHistory(true)
-  }
+    console.log("I changed the history!")
+    // close the Modal
+    setShow(false)
 
+
+  }
+  console.log(changedHistory)
+  
 
   return (
     <div className='addSubPage'>

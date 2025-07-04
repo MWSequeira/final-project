@@ -28,42 +28,15 @@ body {
   min-height: 100vh;
 }
 
-.gameSchedPage {
-  border: solid red 2px;
-  text-align: left;
-}
-
-.teamRosterPage {
-  border:solid lightgray 2px;
-}
 
 .addSubPage {
   border: solid blue 2px;
 }
 
-.addSubForm {
-  border: dotted green 5px;
-  margin: 2rem;
-}
-
-.teamPlayersList {
-  border: lightgray 2px;
-}
 
 .gamesList {
-  border: dotted green 5px;
+  border: solid blue 2px;
   text-align: left;
+  padding: 2rem
 }
 
-.addNewPlayer {
-  border: dotted hotpink 10px
-}
-
-.gameRosterPage {
-  border: solid black 2px;
-}
-
-.getAllPlayers {
-  border: solid lightgray 2px;
-  margin: 5px;
-}
