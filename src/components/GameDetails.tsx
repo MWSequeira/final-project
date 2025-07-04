@@ -20,8 +20,6 @@ function GameDetails({ gameSched,
 
     let chosenGame = parseInt(gameId) // gameId is passed as a string; the prop is a number
     setSelectedGame(gameSched.find(game => game.gameId === chosenGame))
-
-    console.log(teams)
     
     let team1Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team1)
     let team2Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team2)
