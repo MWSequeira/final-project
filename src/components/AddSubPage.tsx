@@ -25,7 +25,7 @@ function AddSubPage( { gameSched,
   })
 
   // small functions for this component
-  console.log(selectedGame.team1)
+  let availPlayers:PlayerType[] = allPlayers.filter(player => player.teamName != selectedGame.team1 && player.teamName !== selectedGame.team2)
 
   let findPlayer = (playerId) => allPlayers.find(player => player.playerId === playerId) // get a particular player
   let updatedPlayerHistory = (playerId, gameId) => findPlayer(playerId).playerHistory[gameId-1] = 5
@@ -50,8 +50,6 @@ function AddSubPage( { gameSched,
     let playerId = parseInt(formValues.playerId) // values from the form are strings
 }
 
-
-
   return (
     <div className='addSubPage'>
 
@@ -68,8 +66,8 @@ function AddSubPage( { gameSched,
             {selectedGame.team1} vs {selectedGame.team2}
           </Col>
           <Col>
-            <h2>Add a Sub</h2>
-            {availPlayers.map(player => <p>
+            <h2>Available Players</h2>
+            {availPlayers.map(player => <p key={player.playerId}>
                 {player.playerId} &mdash; {player.firstName} {player.lastName}, {player.position}
             </p>)}
           </Col>
