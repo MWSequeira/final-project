@@ -2,6 +2,7 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useState, type ChangeEvent } from 'react'
 import { Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import type { GameType, PlayerType } from '../App'
 
 
@@ -20,16 +21,12 @@ function AddSubPage( { gameSched,
 
   // state variables for the form -- in progress values
   const[formValues, setFormValues] = useState({
-    gameId: 0,
+    gameId: selectedGame.gameId,
     playerId: 0
   })
 
   // small functions for this component
   let availPlayers:PlayerType[] = allPlayers.filter(player => player.teamName != selectedGame.team1 && player.teamName !== selectedGame.team2)
-
-  let findPlayer = (playerId) => allPlayers.find(player => player.playerId === playerId) // get a particular player
-  let updatedPlayerHistory = (playerId, gameId) => findPlayer(playerId).playerHistory[gameId-1] = 5
-
 
   // state for the Modal
   const [show, setShow] = useState(false);
@@ -46,9 +43,20 @@ function AddSubPage( { gameSched,
 
   const handleFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault() // to keep the page from refreshing
-    let gameId = parseInt(formValues.gameId) // values from the form are strings
-    let playerId = parseInt(formValues.playerId) // values from the form are strings
-}
+    let playerIdNo = parseInt(formValues.playerId) // values from the form are strings
+    let chosenSub:PlayerType[] = allPlayers.filter(player => player.playerId === playerIdNo) // get the player object within the allPlayes array
+    let chosenSubHistory:Array<number> = chosenSub[0].playerHistory // get the playerHistory array
+    // there's propbaby a more elegant way to do this, but this code works
+    let historyCopy = chosenSubHistory.slice()
+    historyCopy.splice(selectedGame.gameId, 1, 5)
+
+    // now update the allPlayers state so that the subs will show for each game
+    setAllPlayers(allPlayers.map(player => (player.playerId !== playerIdNo ? player: {
+      ...player,
+      playerHistory: historyCopy
+    })))
+  }
+  
 
   return (
     <div className='addSubPage'>
@@ -81,15 +89,6 @@ function AddSubPage( { gameSched,
 
                 <Modal.Body>
                     <form >
-                        <label>Game Number: 
-                            <input
-                                name="gameId"
-                                type="text"
-                                onChange={handleChange}
-                                value={formValues.gameId}
-                            />
-                        </label>
-                        <br />
                         <label>Player Id Number: 
                             <input
                                 name="playerId"

@@ -12,6 +12,7 @@ function DisplayGames( { allPlayers,
     // functions for this component
     let team1Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team1)
     let team2Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team2)
+    let gameSubs:PlayerType[] = allPlayers.filter(player => player.playerHistory[selectedGame.gameId] === 5)
 
   return (
     <Container>
@@ -33,6 +34,9 @@ function DisplayGames( { allPlayers,
             </Col>
             <Col>
                 <h3>Available Subs</h3>
+                {gameSubs.map(player => <p key={player.playerId}>
+                    {player.firstName} {player.lastName}, {player.position}
+                </p>)}
             </Col>
         </Row>
     </Container>
