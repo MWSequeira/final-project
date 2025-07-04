@@ -183,6 +183,7 @@ function App() {
           element={<AddSubPage 
             gameSched={gameSched}
             allPlayers={allPlayers} 
+            setAllPlayers={setAllPlayers}
           />} />
         <Route path="/games/:gameId"
           element={<GameDetails 

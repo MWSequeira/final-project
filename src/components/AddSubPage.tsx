@@ -7,10 +7,13 @@ import type { GameType, PlayerType } from '../App'
 
 type AddSubPageProps = {
   gameSched: GameType[],
-  allPlayers: PlayerType
+  allPlayers: PlayerType[],
+  setAllPlayers: (newValue: PlayerType) => void,
 }
 
-function AddSubPage( { gameSched, allPlayers }: AddSubPageProps) {
+function AddSubPage( { gameSched,
+  allPlayers,
+  setAllPlayers }: AddSubPageProps) {
 
   // state variables for the form -- in progress values
   const[formValues, setFormValues] = useState({
@@ -18,10 +21,17 @@ function AddSubPage( { gameSched, allPlayers }: AddSubPageProps) {
     playerId: 0
   })
 
+  // small functions for this component
+  let findPlayer = (playerId) => allPlayers.find(player => player.playerId === playerId) // get a particular player
+  
+  let updatedPlayerHistory = (playerId, gameId) => findPlayer(playerId).playerHistory[gameId-1] = 5
+
+
   // state for the Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
 
   // I'm borrowing Natalie's code from class here and updating for this form.
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => 
@@ -32,11 +42,15 @@ function AddSubPage( { gameSched, allPlayers }: AddSubPageProps) {
 
   const handleFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault() // to keep the page from refreshing
-    let gameId = parseInt(formValues.gameId)
-    let playerId = parseInt(formValues.playerId)
+    let gameId = parseInt(formValues.gameId) // values from the form are strings
+    let playerId = parseInt(formValues.playerId) // values from the form are strings
     console.log(gameId)
     console.log(playerId)
+    console.log(findPlayer(playerId))
+    console.log(findPlayer(playerId).playerHistory)
     
+    console.log(findPlayer(playerId).playerHistory[gameId]) 
+    console.log(updatedPlayerHistory(playerId, gameId))
 }
 
 
