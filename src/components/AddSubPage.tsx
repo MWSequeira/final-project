@@ -64,12 +64,12 @@ function AddSubPage( { gameSched,
     })))
 
     // next, update the allHistories state so that the allPlayers data will load to the backend
-    // let allHistoriesUpdateArray = []
-    //   for (let i = 0; i < allPlayers.length; i++) {
-    //     allHistoriesUpdateArray.push(allPlayers[i].playerHistory)
-    //   }
-    // setAllHistories(allHistoriesUpdateArray)
-    // console.log(allHistories)
+    let allHistoriesUpdateArray = []
+      for (let i = 0; i < allPlayers.length; i++) {
+        allHistoriesUpdateArray.push(allPlayers[i].playerHistory)
+      }
+    setAllHistories(allHistoriesUpdateArray)
+    console.log(allHistories)
 
     // close the Modal
     setShow(false)
