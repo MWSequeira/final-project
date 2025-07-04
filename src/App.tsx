@@ -132,8 +132,6 @@ function App() {
     asyncFunction()
   }, [])
 
-  console.log(allPlayers)
-
   // UPDATE THE BACKEND WHEN NEEDED
   // first, destructure the players' history arrays to create a state for the dependency array
   let allHistoriesArray = []
