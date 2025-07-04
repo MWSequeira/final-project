@@ -12,16 +12,17 @@ type AddSubPageProps = {
   selectedGame: GameType[],
   allPlayers: PlayerType[],
   setAllPlayers: (newValue: PlayerType) => void,
-  allHistories: Array<number>,
-  setAllHistories: (newValue: Array<number>) => void,
+  changedHistory: boolean,
+  setChangedHistory: (newValue:boolean) => void
 }
 
 function AddSubPage( { gameSched,
   selectedGame,
   allPlayers,
   setAllPlayers,
-  allHistories,
-  setAllHistories }: AddSubPageProps) {
+  changedHistory,
+  setChangedHistory
+   }: AddSubPageProps) {
 
 
   // state variables for the form -- in progress values
@@ -46,35 +47,29 @@ function AddSubPage( { gameSched,
         [event.target.name]: event.target.value 
     })
 
-
   const handleFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {87
     event.preventDefault() // to keep the page from refreshing
     let playerIdNo = parseInt(formValues.playerId) // values from the form are strings
     let chosenSub:PlayerType[] = allPlayers.filter(player => player.playerId === playerIdNo) // get the player object within the allPlayes array
     let chosenSubHistory:Array<number> = chosenSub[0].playerHistory // get the playerHistory array
     
-    // there's propbaby a more elegant way to do update the history, but this code works
-    let historyCopy = chosenSubHistory.slice()
-    historyCopy.splice(selectedGame.gameId, 1, 5)
-
-    // now update the allPlayers state so that the subs will show for each game
-    setAllPlayers(allPlayers.map(player => (player.playerId !== playerIdNo ? player: {
-      ...player,
-      playerHistory: historyCopy
-    })))
-
-    // next, update the allHistories state so that the allPlayers data will load to the backend
-    let allHistoriesUpdateArray = []
-      for (let i = 0; i < allPlayers.length; i++) {
-        allHistoriesUpdateArray.push(allPlayers[i].playerHistory)
-      }
-    setAllHistories(allHistoriesUpdateArray)
-    console.log(allHistories)
+    // there's propbaby a more elegant way to update the history, but this code works
+    let historyCopy = chosenSubHistory.slice() // copy the history array for the sub
+    historyCopy.splice(selectedGame.gameId, 1, 5) // replace the element at the gameId with a 5 
+    
+    // update the allPlayers state so that the subs will show for each game
+     setAllPlayers(allPlayers.map(player => (
+      player.playerId !== playerIdNo ? player: {
+      ...player, playerHistory: historyCopy }
+    )))
 
     // close the Modal
     setShow(false)
+    
+    //trigger an update to the backend
+    setChangedHistory(true)
   }
-  
+
 
   return (
     <div className='addSubPage'>

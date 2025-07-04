@@ -24,6 +24,7 @@ function App() {
   // pieces of state needed throughout the app
   const [selectedTeam, setSelectedTeam] = useState([0, <div>Pick a Team to View</div>])
   const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
+  const [changedHistory, setChangedHistory] = useState(false)
 
   // each state needs three pieces of state to fetch data from the backend
   const [gameSched, setGameSched] = useState<[GameType]>([]) // data we're trying to load
@@ -132,49 +133,46 @@ function App() {
     asyncFunction()
   }, [])
 
-  // UPDATE THE BACKEND WHEN NEEDED
-  // first, destructure the players' history arrays to create a state for the dependency array
-  let allHistoriesArray = []
-  for (let i = 0; i < allPlayers.length; i++) {
-    allHistoriesArray.push(allPlayers[i].playerHistory)
-  }
-  const[allHistories, setAllHistories] = useState(allHistoriesArray)
-
-  // next, use the useEffect hook with a PUT to update the backend
+  // UPDATE THE PLAYER DATA ON THE BACKEND WHEN NEEDED
   // create the other two pieces of state needed for loading and error
-  const [loadingHistories, setLoadingHistories] = useState([]) // whether we're loading or not
-  const [errorHistories, setErrorHistories] = useState<null | string>() // whether we've run into an error
-  // useEffect controls the render and try-catch handles server no-response errors
-  // useEffect(() => {
-  //   const asyncFunction = async () => {
-  //     setLoadingHistories(true)
-  //     try {
-  //       const response = await fetch(allPlayersBinUrl, {
-  //         method: "PUT",
-  //         headers: { // read the documentation for JSONBin.io to get the headers
-  //           "Content-Type": "application/json",
-  //           "X-Master-Key": MY_API_KEY,
-  //         },
-  //         body: JSON.stringify([allPlayers]) // must match "Content-Type"
-  //       }
-  //       )
-  //       // check for a bad response error
-  //       if (!response.ok) {
-  //         setErrorHistories("Error: " + response.statusText)
-  //       } else {
-  //         // const data:PlayerType = await response.json()
-  //         // const allPlayerArray = data[0]
-  //         // setAllPlayers(allPlayerArray)
-          
-  //       }   
-  //     } catch(error: any) {
-  //       setErrorHistories("Error: " + error.message)
-  //     }
-  //     setLoadingHistories(false)
-  //     console.log("updating backend")
-  //   }
-  //   asyncFunction()
-  // }, [allHistories])
+  if (changedHistory === true) {
+    const [loadingHistories, setLoadingHistories] = useState([]) // whether we're loading or not
+    const [errorHistories, setErrorHistories] = useState<null | string>() // whether we've run into an error
+    // next, use the useEffect hook with a PUT to update the backend
+    // useEffect controls the render and try-catch handles server no-response errors
+    useEffect(() => {
+      const asyncFunction = async () => {
+        setLoadingHistories(true)
+        try {
+          const response = await fetch(allPlayersBinUrl, {
+            method: "PUT",
+            headers: { // read the documentation for JSONBin.io to get the headers
+              "Content-Type": "application/json",
+              "X-Master-Key": MY_API_KEY,
+            },
+            body: JSON.stringify([allPlayers]) // must match "Content-Type"
+          }
+          )
+          // check for a bad response error
+          if (!response.ok) {
+            setErrorHistories("Error: " + response.statusText)
+          } else {
+            // const data:PlayerType = await response.json()
+            // const allPlayerArray = data[0]
+            // setAllPlayers(allPlayerArray)
+            
+          }   
+        } catch(error: any) {
+          setErrorHistories("Error: " + error.message)
+        }
+        setLoadingHistories(false)
+        setChangedHistory(false)
+        console.log("updating backend")
+      }
+      asyncFunction()
+    }, [changedHistory])
+  }
+  
 
   return (
     <>
@@ -211,8 +209,8 @@ function App() {
             loadingPlayers={loadingPlayers}
             errorPlayers={errorPlayers}
             setAllPlayers={setAllPlayers}
-            allHistories={allHistories}
-            setAllHistories={setAllHistories}
+            changedHistory={changedHistory}
+            setChangeHistory={setChangedHistory}
           />} />
         <Route path="/games/:gameId"
           element={<GameDetails 
