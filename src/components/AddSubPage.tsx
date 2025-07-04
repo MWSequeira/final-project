@@ -46,7 +46,8 @@ function AddSubPage( { gameSched,
     let playerIdNo = parseInt(formValues.playerId) // values from the form are strings
     let chosenSub:PlayerType[] = allPlayers.filter(player => player.playerId === playerIdNo) // get the player object within the allPlayes array
     let chosenSubHistory:Array<number> = chosenSub[0].playerHistory // get the playerHistory array
-    // there's propbaby a more elegant way to do this, but this code works
+    
+    // there's propbaby a more elegant way to do update the history, but this code works
     let historyCopy = chosenSubHistory.slice()
     historyCopy.splice(selectedGame.gameId, 1, 5)
 
