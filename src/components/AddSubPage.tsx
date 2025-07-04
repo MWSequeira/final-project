@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import { useState, type ChangeEvent } from 'react'
 import { Modal } from 'react-bootstrap'
 import type { GameType, PlayerType } from './ExportTypes'
+import AddNewPlayer from './UpdatePlayer'
 
 
 type AddSubPageProps = {
@@ -25,7 +26,7 @@ function AddSubPage( { gameSched,
   })
 
   // small functions for this component
-  let availPlayers:PlayerType[] = allPlayers.filter(player => player.teamName != selectedGame.team1 && player.teamName !== selectedGame.team2)
+  let availPlayers:PlayerType[] = allPlayers.filter(player => player.teamName != selectedGame.team1 && player.teamName !== selectedGame.team2 && player.playerHistory[selectedGame.gameId] !== 5)
 
   // state for the Modal
   const [show, setShow] = useState(false);
@@ -39,6 +40,7 @@ function AddSubPage( { gameSched,
         ...formValues, 
         [event.target.name]: event.target.value 
     })
+
 
   const handleFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault() // to keep the page from refreshing
@@ -55,6 +57,10 @@ function AddSubPage( { gameSched,
       ...player,
       playerHistory: historyCopy
     })))
+
+
+    // close the Modal
+    setShow(false)
   }
   
 

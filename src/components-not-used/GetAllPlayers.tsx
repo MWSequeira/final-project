@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import type { PlayerType } from './ExportTypes'
+import type { PlayerType } from '../components/ExportTypes'
 
 type GetAllPlayersProps = {
   allPlayers: PlayerType[],

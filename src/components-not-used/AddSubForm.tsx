@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Form, Button } from "react-bootstrap"
-import AddNewPlayer from "./AddNewPlayer"
+import AddNewPlayer from "../components/UpdatePlayer"
 
 type PlayerType = {
   firstName: string,

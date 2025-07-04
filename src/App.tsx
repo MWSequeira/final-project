@@ -103,7 +103,6 @@ function App() {
 
   // GET ALL PLAYERS DATA
   // useEffect controls the render and try-catch handles server no-response errors
-  // useEffect controls the render and try-catch handles server no-response errors
   useEffect(() => {
     const asyncFunction = async () => {
       setLoadingPlayers(true)
