@@ -1,9 +1,8 @@
 import { useState } from 'react'
+import { Container, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import type { PlayerType } from './ExportTypes'
 import type { GameType } from './ExportTypes'
-import { Container, Row, Col } from 'react-bootstrap'
-import PlayerChangeForm from './PlayerChangeForm'
-
 
 type UpdatePlayersProps = {
   allPlayers: PlayerType,
@@ -22,11 +21,19 @@ function UpdatePlayers( { allPlayers,
   errorPlayers,
   selectedGame,
   gameSched }: UpdatePlayersProps) {
-      
-    let inputPlayerId = 0
-    
-    const handleChoosePlayer = (inputPlayerId:number) =>
-    setSelectedPlayer(allPlayers.filter(player => player.playerId = inputPlayerId))
+
+  // state for the player selection form
+  const[formValues, setFormValues] = useState({
+    inputPlayerId: "0"
+  })
+
+
+  // keep track of form  changes
+  const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => 
+    setFormValues({ 
+        ...formValues, 
+        [event.target.name]: event.target.value 
+  })
 
   return (
     <div className='addNewPlayer'>
@@ -35,29 +42,14 @@ function UpdatePlayers( { allPlayers,
 
       <Container>
         <Row>
-        <h2>Make Changes</h2>
+          <h2>Make Changes</h2>
           <p>Change a player's information or league schedule</p>
         </Row>
         <Row>
-          <Col>
-          {allPlayers.map(player => <div key={player.playerId}>
-            {player.playerId} &mdash; {player.firstName} {player.lastName}, {player.position}
-          </div>)}
-          </Col>
-          <Col>
-          <form >
-              <label>Player Id Number: 
-                  <input
-                      name="inputPlayerId"
-                      type="number"
-                      placeholder='0'
-                      onChange={handleChoosePlayer}
-                      value={inputPlayerId}
-                  />
-              </label>  
-          </form>
-          <PlayerChangeForm />
-          </Col>
+        <p>Choose a Player</p>
+                {allPlayers.map(player => <div key={player.playerId}>
+                    <Link to={"/change/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
+                </div>)}
         </Row>
       </Container>
       
@@ -66,3 +58,5 @@ function UpdatePlayers( { allPlayers,
 }
 
 export default UpdatePlayers
+
+{/*  */}

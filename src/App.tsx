@@ -26,7 +26,7 @@ function App() {
   
   // pieces of state needed throughout the app
   const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
-  const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>([])
+  const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>()
   const [changedHistory, setChangedHistory] = useState(false)
 
   // each state needs three pieces of state to fetch data from the backend
@@ -222,7 +222,7 @@ function App() {
             selectedGame={selectedGame}
             gameSched={gameSched}
           />} />
-          <Route path="/change-form"
+          <Route path="/change/:playerId"
             element={<PlayerChangeForm 
               allPlayers={allPlayers}
               selectedPlayer={selectedPlayer}
