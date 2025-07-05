@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { PlayerType } from './ExportTypes'
 import type { GameType } from './ExportTypes'
+import { Container, Row, Col } from 'react-bootstrap'
 
 type UpdatePlayersProps = {
   allPlayers: PlayerType[],
@@ -23,12 +24,21 @@ function UpdatePlayers( { allPlayers,
     <div className='addNewPlayer'>
       { loadingPlayers && <p>Loading...</p> }
       { errorPlayers && <p> {errorPlayers}</p> }
-      <h2>Make Changes</h2>
-      <p>Change a player's information or league schedule</p>
-      <p>Choose a Player</p>
+
+      <Container>
+        <Row>
+        <h2>Make Changes</h2>
+          <p>Change a player's information or league schedule</p>
+        </Row>
+        <Row>
+          <Col>
+          <p>Choose a Player</p>
           {allPlayers.map(player => <div key={player.playerId}>
-            {player.firstName} {player.lastName}, {player.position}
-          </div>)}
+            {player.playerId} &mdash; {player.firstName} {player.lastName}, {player.position}
+          </div>)}</Col>
+        </Row>
+      </Container>
+      
     </div>
   )
 }

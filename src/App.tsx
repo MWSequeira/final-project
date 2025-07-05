@@ -115,8 +115,7 @@ function App() {
           method: "GET",
           headers: { // read the documentation for JSONBin.io to get the headers
             "X-Master-Key": MY_API_KEY,
-            "X-Bin-Meta": false,
-            "X-JSON-Path": "$..players"
+            "X-Bin-Meta": false
           }}
         )
         // check for a bad response error
@@ -136,47 +135,34 @@ function App() {
     asyncFunction()
   }, [])
 
-  // UPDATE THE PLAYER DATA ON THE BACKEND WHEN NEEDED
-  // create the other two pieces of state needed for loading and error
-
-  if (changedHistory === true) { // I want to run only when I confirm something has changed
-    const [loadingHistories, setLoadingHistories] = useState([]) // whether we're loading or not
-    const [errorHistories, setErrorHistories] = useState<null | string>() // whether we've run into an error
-    // next, use the useEffect hook with a PUT to update the backend
-    // useEffect controls the render and try-catch handles server no-response errors
-    useEffect(() => {
-      const asyncFunction = async () => {
-        setLoadingHistories(true)
-        try {
-          const response = await fetch(allPlayersBinUrl, {
-            method: "PUT",
-            headers: { // read the documentation for JSONBin.io to get the headers
-              "Content-Type": "application/json",
-              "X-Master-Key": MY_API_KEY,
-            },
-            body: JSON.stringify([allPlayers]) // must match "Content-Type"
-          }
-          )
-          // check for a bad response error
-          if (!response.ok) {
-            setErrorHistories("Error: " + response.statusText)
-          } else {
-            // const data:PlayerType = await response.json()
-            // const allPlayerArray = data[0]
-            // setAllPlayers(allPlayerArray)
-            
-          }   
-        } catch(error: any) {
-          setErrorHistories("Error: " + error.message)
-        }
-        setLoadingHistories(false)
-        setChangedHistory(false)
-        console.log("updating backend")
+  // UPDATE THE PLAYER DATA ON THE BACKEND WHEN NEEDED   
+  const updateAllPlayers = async () => {
+   console.log(allPlayers)
+    try {
+      const response = await fetch(allPlayersBinUrl, {
+        method: "PUT",
+        headers: { // read the documentation for JSONBin.io to get the headers
+          "Content-Type": "application/json",
+          "X-Master-Key": MY_API_KEY,
+        },
+        body: JSON.stringify([allPlayers]) // must match "Content-Type"
       }
-      asyncFunction()
-    }, [])
+      )
+      // check for a bad response error
+      if (!response.ok) {
+        setErrorHistories("Error: " + response.statusText)
+      } else {
+        // const data:PlayerType = await response.json()
+        // const allPlayerArray = data[0]
+        // setAllPlayers(allPlayerArray)
+        
+      }   
+    } catch(error: any) {
+      setErrorHistories("Error: " + error.message)
+    }
+    
+    console.log("updating backend")
   }
-  
 
   return (
     <>
@@ -209,6 +195,7 @@ function App() {
             setAllPlayers={setAllPlayers}
             changedHistory={changedHistory}
             setChangeHistory={setChangedHistory}
+            updateAllPlayers={updateAllPlayers}
           />} />
         <Route path="/player-schedule" 
           element={<PlayerSchedPage

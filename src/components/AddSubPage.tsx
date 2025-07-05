@@ -5,8 +5,8 @@ import { Modal } from 'react-bootstrap'
 import type { GameType, PlayerType } from './ExportTypes'
 
 type AddSubPageProps = {
-  selectedGame: GameType[],
-  allPlayers: PlayerType[],
+  selectedGame: GameType,
+  allPlayers: PlayerType,
   setAllPlayers: (newValue: PlayerType) => void,
   changedHistory: boolean,
   setChangedHistory: (newValue) => void
@@ -15,7 +15,7 @@ type AddSubPageProps = {
 function AddSubPage( { selectedGame,
   allPlayers,
   setAllPlayers,
-  changedHistory,
+  updateAllPlayers,
   setChangedHistory
    }: AddSubPageProps) {
 
@@ -50,7 +50,7 @@ function AddSubPage( { selectedGame,
     // there's propbaby a more elegant way to update the history, but this code works
     let historyCopy = chosenSubHistory.slice() // copy the history array for the sub
     historyCopy.splice(selectedGame.gameId, 1, 5) // replace the element at the gameId with a 5 
-    
+    console.log(historyCopy)
     // update the allPlayers state so that the subs will show for each game
      setAllPlayers(allPlayers.map(player => (
       player.playerId !== playerIdNo ? player: {
@@ -60,10 +60,7 @@ function AddSubPage( { selectedGame,
     // close the Modal
     setShow(false)
     //trigger an update to the backend
-    setChangedHistory(true)
-
-
-
+    updateAllPlayers()
   }
   
 

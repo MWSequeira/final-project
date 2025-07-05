@@ -15,6 +15,7 @@ function GameDetails({ gameSched,
     setSelectedGame}: GameDetailsProps) {
 
     const { gameId } = useParams()
+    console.log(gameId)
 
     let chosenGameId = parseInt(gameId) // gameId is passed as a string; the prop is a number
     setSelectedGame(gameSched.find(game => game.gameId === chosenGameId))

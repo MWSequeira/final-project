@@ -14,6 +14,7 @@ function DisplayGames( { allPlayers,
     let team2Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team2)
     let gameSubs:PlayerType[] = allPlayers.filter(player => player.playerHistory[selectedGame.gameId] === 5)
 
+
   return (
     <Container>
         <Row>
