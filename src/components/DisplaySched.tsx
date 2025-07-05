@@ -10,17 +10,20 @@ function DisplaySched( { selectedPlayer,gameSched }: DisplaySchedProps) {
 
     console.log(selectedPlayer)
     // functions for this component
-    // let playerGames = gameSched.filter(game => selectedPlayer[0].playerHistory[game.gameId] !== 0)
+    let playerGames = gameSched.filter(game => selectedPlayer.playerHistory[game.gameId] !== 0)
 
   return (
     <Container>
         <Row>
             <h1>{selectedPlayer.firstName}'s schedule</h1> 
-            <p>{selectedPlayer.firstName} {selectedPlayer.lastName}</p>
-            <h2>{selectedPlayer.teamName}</h2>
+            <p>{selectedPlayer.firstName} {selectedPlayer.lastName}, {selectedPlayer.position}</p>
+            <h2>Team: {selectedPlayer.teamName}</h2>
         </Row>
         <Row>
-            <div>Player's schedule here</div>
+            <div>
+                {playerGames.map(game => <div key={game.gameId}>
+                    {game.date} at {game.time} </div>)}
+            </div>
         </Row>
     </Container>
   )
