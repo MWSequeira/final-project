@@ -1,26 +1,33 @@
 import type { PlayerType, GameType } from "./ExportTypes"
 import { Container, Row, Col } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 type PlayerSchedPageProps = {
     allPlayers: PlayerType[],
-    gameSched: GameType[]
+    selectedPlayer: PlayerType[],
+    gameSched: GameType[],
+    loadingPlayers: boolean,
+    errorPlayers: string | null
 }
 
-function PlayerSchedPage( { allPlayers, gameSched }: PlayerSchedPageProps) {
+function PlayerSchedPage( { allPlayers, selectedPlayer, gameSched, loadingPlayers, errorPlayers }: PlayerSchedPageProps) {
+
 
   return (
     <div>
+        { loadingPlayers && <p>Loading...</p> }
+        { errorPlayers && <p> {errorPlayers}</p> }
         <Container>
             <Row>
             <h1>Player Schedules</h1>
             </Row>
             <Row>
-                <Col>
-                <p>Players List here</p>
-                </Col>
-                <Col>
-                <p>Selected Player's Schedule Here</p>
-                </Col>
+
+                <p>Choose a Player</p>
+                {allPlayers.map(player => <div key={player.playerId}>
+                    <Link to={"/scheds/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
+                </div>)}
+
             </Row>
 
         </Container>

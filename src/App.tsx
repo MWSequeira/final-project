@@ -11,6 +11,7 @@ import GamesListPage from './components/GamesListPage'
 import AddSubPage from './components/AddSubPage'
 import GameDetails from './components/GameDetails'
 import PlayerSchedPage from './components/PlayerSchedPage'
+import PlayerSched from './components/PlayerSched'
 
 // import types
 import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
@@ -23,6 +24,7 @@ function App() {
   
   // pieces of state needed throughout the app
   const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
+  const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>({})
   const [changedHistory, setChangedHistory] = useState(false)
 
   // each state needs three pieces of state to fetch data from the backend
@@ -134,8 +136,8 @@ function App() {
 
   // UPDATE THE PLAYER DATA ON THE BACKEND WHEN NEEDED
   // create the other two pieces of state needed for loading and error
-  console.log(changedHistory)
-  if (changedHistory === true) {
+
+  if (changedHistory === true) { // I want to run only when I confirm something has changed
     const [loadingHistories, setLoadingHistories] = useState([]) // whether we're loading or not
     const [errorHistories, setErrorHistories] = useState<null | string>() // whether we've run into an error
     // next, use the useEffect hook with a PUT to update the backend
@@ -170,7 +172,7 @@ function App() {
         console.log("updating backend")
       }
       asyncFunction()
-    }, [changedHistory])
+    }, [allPlayers])
   }
   
 
@@ -207,8 +209,19 @@ function App() {
           setSelectedGame={setSelectedGame}
           />} />
         <Route path="/player-schedule" 
-          element={<PlayerSchedPage />}
-        />
+          element={<PlayerSchedPage
+            allPlayers={allPlayers}
+            gameSched={gameSched}
+            loadingPlayers={loadingPlayers}
+            errorPlayers={errorPlayers}
+          />} />
+        <Route path="/scheds/:playerId"
+          element={<PlayerSched
+            allPlayers={allPlayers}
+            gameSched={gameSched}
+            selectedPlayer={selectedPlayer}
+            setSelectedPlayer={setSelectedPlayer} />}
+          />
       </Routes>
 
     </>

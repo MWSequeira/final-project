@@ -19,8 +19,6 @@ function AddSubPage( { selectedGame,
   setChangedHistory
    }: AddSubPageProps) {
 
-    console.log(changedHistory)
-
   // state variables for the form -- in progress values
   const[formValues, setFormValues] = useState({
     gameId: selectedGame.gameId,
@@ -58,15 +56,15 @@ function AddSubPage( { selectedGame,
       player.playerId !== playerIdNo ? player: {
       ...player, playerHistory: historyCopy }
     )))
-    //trigger an update to the backend
-    setChangedHistory(true)
-    console.log("I changed the history!")
+
     // close the Modal
     setShow(false)
+    //trigger an update to the backend
+    setChangedHistory(true)
+
 
 
   }
-  console.log(changedHistory)
   
 
   return (
