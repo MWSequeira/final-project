@@ -1,3 +1,4 @@
+import { useState } from "react"
 import type { PlayerType, GameType} from "./ExportTypes"
 
 type PlayerChangeFormProps ={
@@ -16,9 +17,69 @@ function PlayerChangeForm( { allPlayers,
     loadingPlayers,
     errorPlayers,
     selectedGame,
-    gameSched }) {
+    gameSched }: PlayerChangeFormProps) {
+
+    const[formValues, setFormValues] = useState({
+        firstName: "first name",
+        lastName: "last name",
+        phone: "XXX-xxx-xxxx",
+        position: "position",
+    })
+
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => 
+        setFormValues({ 
+            ...formValues, 
+            [event.target.name]: event.target.value 
+        })
+
+    // handling changes in the form
+    const handleFormSubmit = (event: ChangeEvent<HTMLInputElement>) => 
+    setFormValues({ 
+        ...formValues, 
+        [event.target.name]: event.target.value 
+    })
+
+
   return (
-    <div>PlayerChangeForm</div>
+    <form>
+        <label>Player Name: 
+            <input
+                name="firstName"
+                type="text"
+                placeholder='first name'
+                onChange={handleChange}
+                value={formValues.firstName}
+            />
+        </label> 
+        <label>Player Name: 
+            <input
+                name="lastName"
+                type="text"
+                placeholder='last name'
+                onChange={handleChange}
+                value={formValues.lastName}
+            />
+        </label> 
+        <label>Player Name: 
+            <input
+                name="phone"
+                type="text"
+                placeholder='XXX-xxx-xxxx'
+                onChange={handleChange}
+                value={formValues.phone}
+            />
+        </label> 
+        <label>Player Name: 
+            <input
+                name="position"
+                type="text"
+                placeholder='position'
+                onChange={handleChange}
+                value={formValues.position}
+            />
+        </label> 
+    </form>
   )
 }
 
