@@ -22,19 +22,6 @@ function UpdatePlayers( { allPlayers,
   selectedGame,
   gameSched }: UpdatePlayersProps) {
 
-  // state for the player selection form
-  const[formValues, setFormValues] = useState({
-    inputPlayerId: "0"
-  })
-
-
-  // keep track of form  changes
-  const handleFormChange = (event: ChangeEvent<HTMLInputElement>) => 
-    setFormValues({ 
-        ...formValues, 
-        [event.target.name]: event.target.value 
-  })
-
   return (
     <div className='addNewPlayer'>
       { loadingPlayers && <p>Loading...</p> }

@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { useParams } from "react-router-dom"
+import { Button } from "react-bootstrap"
 import type { PlayerType, GameType} from "./ExportTypes"
 
 type PlayerChangeFormProps ={
     allPlayers: PlayerType,
+    setAllPlayers: (newValue:PlayerType) => void,
     selectedPlayer: PlayerType,
     setSelectedPlayer: (newValue:PlayerType) => void,
     loadingPlayers: boolean,
@@ -13,10 +15,12 @@ type PlayerChangeFormProps ={
 }
 
 function PlayerChangeForm( { allPlayers,
+    setAllPlayers,
     selectedPlayer,
     setSelectedPlayer,
     loadingPlayers,
     errorPlayers,
+    updateAllPlayers,
     selectedGame,
     gameSched }: PlayerChangeFormProps) {
 
@@ -44,17 +48,27 @@ function PlayerChangeForm( { allPlayers,
     // select the player to update AND open the Modal
     const handleFormSubmit = (event: MouseEvent) => {
         event.preventDefault() // to keep the page from refreshing
-        let chosenPlayerId = parseInt(formValues.inputPlayerId) // values from the form are strings
-        setSelectedPlayer(allPlayers.filter(player => player.playerId === chosenPlayerId))
-        handleShow
+        setAllPlayers(allPlayers.map(player =>(
+            player.playerId !== selectedPlayer.playerId ? player: {
+                ...player, firstName: formValues.firstName, 
+                lastName: formValues.lastName,
+                phone: formValues.phone,
+                position: formValues.position
+            }
+        ) ))
+        console.log(allPlayers)
+        updateAllPlayers() // trigger an update to the backend
     }
-
-    console.log(selectedPlayer)
 
   return (
     <>
+        { loadingPlayers && <p>Loading...</p> }
+        { errorPlayers && <p>{errorPlayers}</p> }
         <form>
             <p></p>
+            <p className="alert">Sorry, but you'll have to re-enter all of your information.<br/>
+            <b>All fields must be filled</b> or your data will be lost.<br />
+            For your convenience, your current information is provided for you to copy and paste into the fields.</p>
             <label>First Name: <b>{selectedPlayer.firstName}</b><br />Change to: 
                 <input
                     name="firstName"
@@ -65,7 +79,7 @@ function PlayerChangeForm( { allPlayers,
                 />
             </label> 
             <p></p>
-            <label>Last Name: <b>{selectedPlayer.lastName}</b><br /> Change to:
+            <label>Last Name: <b>{selectedPlayer.lastName}</b><br /> Change to: 
                 <input
                     name="lastName"
                     type="text"
@@ -94,6 +108,8 @@ function PlayerChangeForm( { allPlayers,
                     value={formValues.position}
                 />
             </label> 
+            <p></p>
+            <Button variant="outline-success" onClick={handleFormSubmit}>Submit Info</Button>
         </form>
     </>
   )

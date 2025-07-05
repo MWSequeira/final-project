@@ -40,3 +40,7 @@ body {
   padding: 2rem
 }
 
+.alert {
+  border: solid red 2px;
+  padding: 2 rem
+}

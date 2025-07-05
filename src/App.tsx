@@ -225,6 +225,7 @@ function App() {
           <Route path="/change/:playerId"
             element={<PlayerChangeForm 
               allPlayers={allPlayers}
+              setAllPlayers={setAllPlayers}
               selectedPlayer={selectedPlayer}
               setSelectedPlayer={setSelectedPlayer}
               loadingPlayers={loadingPlayers}
