@@ -8,7 +8,6 @@ type DisplaySchedProps = {
 
 function DisplaySched( { selectedPlayer,gameSched }: DisplaySchedProps) {
 
-    console.log(selectedPlayer)
     // functions for this component
     let playerGames = gameSched.filter(game => selectedPlayer.playerHistory[game.gameId] !== 0)
 
