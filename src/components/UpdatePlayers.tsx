@@ -27,7 +27,7 @@ function UpdatePlayers( { allPlayers,
       <p>Change a player's information or league schedule</p>
       <p>Choose a Player</p>
           {allPlayers.map(player => <div key={player.playerId}>
-            {player.playerId} &mdash; {player.firstName} {player.lastName}, {player.position}
+            {player.firstName} {player.lastName}, {player.position}
           </div>)}
     </div>
   )

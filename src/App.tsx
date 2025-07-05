@@ -16,6 +16,7 @@ import UpdatePlayers from './components/UpdatePlayers'
 
 // import types
 import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
+import PlayerChangeForm from './components/PlayerChangeForm'
 
 function App() {
   // data locations
@@ -222,8 +223,8 @@ function App() {
             allPlayers={allPlayers}
             gameSched={gameSched}
             selectedPlayer={selectedPlayer}
-            setSelectedPlayer={setSelectedPlayer} />}
-          />
+            setSelectedPlayer={setSelectedPlayer}
+          />} />
           <Route path="/update-player"
           element={<UpdatePlayers 
             allPlayers={allPlayers}
@@ -233,8 +234,17 @@ function App() {
             errorPlayers={errorPlayers}
             selectedGame={selectedGame}
             gameSched={gameSched}
-            />}
-          />
+          />} />
+          <Route path="/change-form"
+            element={<PlayerChangeForm 
+              allPlayers={allPlayers}
+              selectedPlayer={selectedPlayer}
+              setSelectedPlayer={setSelectedPlayer}
+              loadingPlayers={loadingPlayers}
+              errorPlayers={errorPlayers}
+              selectedGame={selectedGame}
+              gameSched={gameSched}
+          />}/>
       </Routes>
 
     </>
