@@ -49,49 +49,53 @@ function PlayerChangeForm( { allPlayers,
         handleShow
     }
 
+    console.log(selectedPlayer)
+
   return (
-    <form>
-        <p></p>
-        <label>First Name: 
-            <input
-                name="firstName"
-                type="text"
-                placeholder= {selectedPlayer.firstName}
-                onChange={handleChange}
-                value={formValues.firstName}
-            />
-        </label> 
-        <p></p>
-        <label>Last Name: 
-            <input
-                name="lastName"
-                type="text"
-                placeholder='last name'
-                onChange={handleChange}
-                value={formValues.lastName}
-            />
-        </label> 
-        <p></p>
-        <label>Phone Number: 
-            <input
-                name="phone"
-                type="text"
-                placeholder='XXX-xxx-xxxx'
-                onChange={handleChange}
-                value={formValues.phone}
-            />
-        </label> 
-        <p></p>
-        <label>Player Position: 
-            <input
-                name="position"
-                type="text"
-                placeholder='position'
-                onChange={handleChange}
-                value={formValues.position}
-            />
-        </label> 
-    </form>
+    <>
+        <form>
+            <p></p>
+            <label>First Name: <b>{selectedPlayer.firstName}</b><br />Change to: 
+                <input
+                    name="firstName"
+                    type="text"
+                    placeholder="first name"
+                    onChange={handleChange}
+                    value={formValues.firstName}
+                />
+            </label> 
+            <p></p>
+            <label>Last Name: <b>{selectedPlayer.lastName}</b><br /> Change to:
+                <input
+                    name="lastName"
+                    type="text"
+                    placeholder='last Name'
+                    onChange={handleChange}
+                    value={formValues.lastName}
+                />
+            </label> 
+            <p></p>
+            <label>Phone Number: <b>{selectedPlayer.phone}</b><br />Change to:
+                <input
+                    name="phone"
+                    type="text"
+                    placeholder='XXX-xxx-xxxx'
+                    onChange={handleChange}
+                    value={formValues.phone}
+                />
+            </label> 
+            <p></p>
+            <label>Player Position: <b>{selectedPlayer.position}</b><br />Change to:
+                <input
+                    name="position"
+                    type="text"
+                    placeholder='position'
+                    onChange={handleChange}
+                    value={formValues.position}
+                />
+            </label> 
+        </form>
+    </>
   )
 }
 
