@@ -1,16 +1,18 @@
-import DisplaySched from './DisplaySched'
 import { useParams } from 'react-router-dom'
 import type { GameType, PlayerType } from './ExportTypes'
-
+import DisplaySched from './DisplaySched'
 
 type PlayerSchedProps = {
     allPlayers: PlayerType[],
-    gameSched: GameType
+    gameSched: GameType[],
     selectedPlayer: PlayerType[],
-    setSelectedPlayer: (newValue: PlayerType[]) => void
+    setSelectedPlayer: (newValue: PlayerType) => void
 }
 
-function PlayerSched( { allPlayers, setSelectedPlayer}: PlayerSchedProps) {
+function PlayerSched( { allPlayers, 
+    gameSched,
+    selectedPlayer, 
+    setSelectedPlayer }: PlayerSchedProps) {
 
     const { playerId } = useParams()
 
@@ -20,8 +22,9 @@ function PlayerSched( { allPlayers, setSelectedPlayer}: PlayerSchedProps) {
   return (
     <div>
         <DisplaySched
-            allPlayers={allPlayers}
-            gameSched={gameSched} />
+            gameSched={gameSched}
+            selectedPlayer={selectedPlayer}
+        />
     </div>
   )
 }

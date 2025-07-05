@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 type PlayerSchedPageProps = {
     allPlayers: PlayerType[],
-    selectedPlayer: PlayerType[],
     gameSched: GameType[],
+    selectedPlayer: PlayerType[],
     loadingPlayers: boolean,
     errorPlayers: string | null
 }
