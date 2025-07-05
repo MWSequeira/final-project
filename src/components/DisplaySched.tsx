@@ -21,7 +21,8 @@ function DisplaySched( { selectedPlayer,gameSched }: DisplaySchedProps) {
         <Row>
             <div>
                 {playerGames.map(game => <div key={game.gameId}>
-                    {game.date} at {game.time} </div>)}
+                    <p>{game.date} at {game.time} </p>
+                </div>)}
             </div>
         </Row>
     </Container>

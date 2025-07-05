@@ -4,27 +4,31 @@ import type { GameType } from './ExportTypes'
 
 type UpdatePlayersProps = {
   allPlayers: PlayerType[],
+  selectedPlayer: PlayerType[],
+  setSelectedPlayer: (newValue: PlayerType) => void,
   loadingPlayers: boolean,
   errorPlayers: null | string,
   selectedGame: GameType[],
+  gameSched: GameType[]
+
 }
 
 function UpdatePlayers( { allPlayers, 
   loadingPlayers, 
   errorPlayers, 
   selectedGame }: UpdatePlayersProps) {
-    
-    // data location -- happens to be the same as in the App component
-    const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
       
 
   return (
     <div className='addNewPlayer'>
       { loadingPlayers && <p>Loading...</p> }
       { errorPlayers && <p> {errorPlayers}</p> }
-
-      <alert>Player Added to Subs List for Game {selectedGame.gameId}</alert>
-
+      <h2>Make Changes</h2>
+      <p>Change a player's information or league schedule</p>
+      <p>Choose a Player</p>
+          {allPlayers.map(player => <div key={player.playerId}>
+            {player.playerId} &mdash; {player.firstName} {player.lastName}, {player.position}
+          </div>)}
     </div>
   )
 }

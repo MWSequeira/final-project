@@ -12,6 +12,7 @@ import AddSubPage from './components/AddSubPage'
 import GameDetails from './components/GameDetails'
 import PlayerSchedPage from './components/PlayerSchedPage'
 import PlayerSched from './components/PlayerSched'
+import UpdatePlayers from './components/UpdatePlayers'
 
 // import types
 import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
@@ -172,7 +173,7 @@ function App() {
         console.log("updating backend")
       }
       asyncFunction()
-    }, [allPlayers])
+    }, [])
   }
   
 
@@ -189,6 +190,14 @@ function App() {
             selectedGame={selectedGame}
             setSelectedGame={setSelectedGame}
           />} />
+        <Route path="/games/:gameId"
+          element={<GameDetails 
+          gameSched={gameSched}
+          teams={teams}
+          allPlayers={allPlayers} 
+          selectedGame={selectedGame}
+          setSelectedGame={setSelectedGame}
+          />} />
         <Route path="/add-sub" 
           element={<AddSubPage 
             gameSched={gameSched}
@@ -199,14 +208,6 @@ function App() {
             setAllPlayers={setAllPlayers}
             changedHistory={changedHistory}
             setChangeHistory={setChangedHistory}
-          />} />
-        <Route path="/games/:gameId"
-          element={<GameDetails 
-          gameSched={gameSched}
-          teams={teams}
-          allPlayers={allPlayers} 
-          selectedGame={selectedGame}
-          setSelectedGame={setSelectedGame}
           />} />
         <Route path="/player-schedule" 
           element={<PlayerSchedPage
@@ -222,6 +223,17 @@ function App() {
             gameSched={gameSched}
             selectedPlayer={selectedPlayer}
             setSelectedPlayer={setSelectedPlayer} />}
+          />
+          <Route path="/update-player"
+          element={<UpdatePlayers 
+            allPlayers={allPlayers}
+            selectedPlayer={selectedPlayer}
+            setSelectedPlayer={setSelectedPlayer}
+            loadingPlayers={loadingPlayers}
+            errorPlayers={errorPlayers}
+            selectedGame={selectedGame}
+            gameSched={gameSched}
+            />}
           />
       </Routes>
 
