@@ -11,7 +11,8 @@ type PlayerSchedPageProps = {
 }
 
 function PlayerSchedPage( { allPlayers, selectedPlayer, gameSched, loadingPlayers, errorPlayers }: PlayerSchedPageProps) {
-
+    
+const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
 
   return (
     <div>
@@ -24,7 +25,7 @@ function PlayerSchedPage( { allPlayers, selectedPlayer, gameSched, loadingPlayer
             <Row>
 
                 <p>Choose a Player</p>
-                {allPlayers.map(player => <div key={player.playerId}>
+                {currentPlayers.map(player => <div key={player.playerId}>
                     <Link to={"/scheds/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
                 </div>)}
 

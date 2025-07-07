@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import type { PlayerType, GameType} from "./ExportTypes"
 
 type PlayerChangeFormProps ={
@@ -83,16 +84,18 @@ function PlayerChangeForm( { allPlayers,
         updateAllPlayers() // trigger an update to the backend
     }
 
-
   return (
     <>
         { loadingPlayers && <p>Loading...</p> }
         { errorPlayers && <p>{errorPlayers}</p> }
         <form>
             <p></p>
-            <p className="alert">Sorry, but you'll have to re-enter all of your information.<br/>
+            <p className="alert">
+            Sorry, but you'll have to re-enter all of your information.<br/>
             <b>All fields must be filled</b> or your data will be lost.<br />
-            For your convenience, your current information is provided for you to copy and paste into the fields.</p>
+            For your convenience, your current information is provided for you to copy and paste into the fields.<br />
+            <Link to="/player-schedule">Don't Make Changes and Go Back</Link>
+            </p>
             <label>First Name: <b>{selectedPlayer.firstName}</b><br />Change to: 
                 <input
                     name="firstName"

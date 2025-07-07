@@ -34,7 +34,7 @@ function UpdatePlayers( { allPlayers,
           <h2>Make Changes</h2>
         </Row>
         <Row>
-          <p>Change a player's information or league schedule. Choose a Player</p>
+          <p>Choose a player to change that player's information:</p>
             {currentPlayers.map(player => <div key={player.playerId}>
                 <Link to={"/change/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
             </div>)}
@@ -46,5 +46,3 @@ function UpdatePlayers( { allPlayers,
 }
 
 export default UpdatePlayers
-
-{/*  */}
