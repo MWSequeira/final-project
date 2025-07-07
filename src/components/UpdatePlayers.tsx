@@ -22,7 +22,7 @@ function UpdatePlayers( { allPlayers,
   selectedGame,
   gameSched }: UpdatePlayersProps) {
 
-    const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
+  const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
 
   return (
     <div className='addNewPlayer'>

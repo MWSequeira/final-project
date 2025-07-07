@@ -5,10 +5,10 @@ import { Link } from "react-router-dom"
 import type { PlayerType, GameType} from "./ExportTypes"
 
 type PlayerChangeFormProps ={
-    allPlayers: PlayerType,
-    setAllPlayers: (newValue:PlayerType) => void,
+    allPlayers: [PlayerType],
+    setAllPlayers: (newValue:PlayerType | null) => void,
     selectedPlayer: PlayerType,
-    setSelectedPlayer: (newValue:PlayerType) => void,
+    setSelectedPlayer: (newValue: PlayerType | null) => void,
     loadingPlayers: boolean,
     errorPlayers: string | null,
     updateAllPlayers: () => void,
@@ -28,8 +28,6 @@ function PlayerChangeForm( { allPlayers,
 
     const { playerId } = useParams()
 
-    const[position, setPosition] = useState("Defense")
-
     let chosenPlayerId = parseInt(playerId) // playerId is passed as a string; the prop is a number
     setSelectedPlayer(allPlayers.find(player => player.playerId === chosenPlayerId))
 
@@ -43,7 +41,7 @@ function PlayerChangeForm( { allPlayers,
 
     // handling text changes in the form
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => 
-    setFormValues({ 
+        setFormValues({ 
         ...formValues, 
         [event.target.name]: event.target.value 
     })
@@ -73,22 +71,52 @@ function PlayerChangeForm( { allPlayers,
     // handling removal of the player
     const handleRemovePlayer = (event: MouseEvent) => {
         event.preventDefault() // keep the page from refreshing
-        
         // the player's history will be removed, but the info will still be available.
         // I'm structuring player removal this way so that logic can later be added to allow the league to show the player's history before he left (i.e. if he played in previous games)
         let playerHistory:Array<number> = selectedPlayer.playerHistory // get the playerHistory array
         // there's propbaby a more elegant way to update the history, but this code works
         let historyCopy = playerHistory.slice() // copy the history array for the sub
         historyCopy.splice(1, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) // replace all the game elements with a 0 
+        console.log("historyCopy", historyCopy)
+        console.log(selectedPlayer)
 
+        let something = "a"
+        let somethingElse = "b"
+        const answer = (something === somethingElse) ? something : somethingElse // answer is b
+        console.log("answer", answer)
+        const altAnswer = (something !== somethingElse) ? something : somethingElse // altAnswer is a
+        console.log("altAnswer", altAnswer)
+
+        let playerToRemove = ({...selectedPlayer, playerHistory: historyCopy})
+        let updatedPlayerToRemove = ({...playerToRemove, teamName: "Removed"})
+        console.log("updatedPlayerToRemove", updatedPlayerToRemove)
+
+        let arrayToSend = allPlayers.map(player => player.playerId === playerToRemove.playerId ? playerToRemove : player)
+        console.log("arrayToSend", arrayToSend)
+
+        //    const updatedPlayerHistory = selectedPlayer.playerHistory.map(()=>{
+        //       return 0;
+        //    })
+        //    console.log(updatedPlayerHistory);
+        //    console.log('player History',historyCopy);
+        //    console.log(allPlayers);
+        //    const updatedTeamPlayers = allPlayers.map((player)=> {
+        //    if( player.playerId === selectedPlayer.playerId){
+        //     player.playerHistory = updatedPlayerHistory;
+        //    }
+        //    return player;
+        // }
+        // console.log('choosen player',updatedTeamPlayers)
         // update the allPlayers state so that this player will not show
-         setAllPlayers(allPlayers.map(player => (
-          player.playerId !== selectedPlayer.playerId ? player: {
-          ...player, playerHistory: historyCopy, teamName: "Removed" }
-        )))
+        //  setAllPlayers(allPlayers.map(player => (
+        //   player.playerId !== selectedPlayer.playerId ? player: {
+        //   ...player, playerHistory: [], teamName: "Removed" }
+        // )))
+       // setAllPlayers(())
         alert("Player removed")
-        updateAllPlayers() // trigger an update to the backend
+       // updateAllPlayers() // trigger an update to the backend
     }
+        // const number = number ? do something : do another thing
 
   return (
     <>

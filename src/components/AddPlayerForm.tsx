@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 import type { PlayerType } from "./ExportTypes"
+import GamesListPage from "./GamesListPage"
 
 type AddPlayerFormProps = {
     allPlayers: [PlayerType],
@@ -46,6 +47,7 @@ function AddPlayerForm( { allPlayers,
 
         setAllPlayers([...allPlayers, newPlayer])
         alert("Player Added")
+        console.log(allPlayers)
         updateAllPlayers() // trigger an update to the backend
     }
 
