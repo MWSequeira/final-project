@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type ChangeEvent } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
@@ -26,9 +26,9 @@ function PlayerChangeForm( { allPlayers,
     selectedGame,
     gameSched }: PlayerChangeFormProps) {
 
-
-
     const { playerId } = useParams()
+
+    const[position, setPosition] = useState("Defense")
 
     let chosenPlayerId = parseInt(playerId) // playerId is passed as a string; the prop is a number
     setSelectedPlayer(allPlayers.find(player => player.playerId === chosenPlayerId))
@@ -41,12 +41,20 @@ function PlayerChangeForm( { allPlayers,
         position: "position"
     })
 
-    // handling changes in the form
+    // handling text changes in the form
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => 
     setFormValues({ 
         ...formValues, 
         [event.target.name]: event.target.value 
     })
+
+    // state for the radio buttons
+    const[radioValue, setRadioValue] = useState("Defense")
+
+    // handling radio button changes in the form
+    const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setRadioValue(event.target.value)
+        }
 
     // handling changes to the player's data
     const handleFormSubmit = (event: MouseEvent) => {
@@ -56,7 +64,7 @@ function PlayerChangeForm( { allPlayers,
                 ...player, firstName: formValues.firstName, 
                 lastName: formValues.lastName,
                 phone: formValues.phone,
-                position: formValues.position
+                position: radioValue
             }
         ) ))
         updateAllPlayers() // trigger an update to the backend
@@ -92,8 +100,10 @@ function PlayerChangeForm( { allPlayers,
             Sorry, but you'll have to re-enter all of your information.<br/>
             <b>All fields must be filled</b> or your data will be lost.<br />
             For your convenience, your current information is provided for you to copy and paste into the fields.<br />
-            <Link to="/player-schedule">Don't Make Changes and Go Back</Link>
+            <Link to="/player-schedule"><b>Don't Make Changes and Go Back</b></Link>
             </p>
+            <Button variant="danger" onClick={handleRemovePlayer}>Remove This Player</Button>
+            <p></p>
             <label>First Name: <b>{selectedPlayer.firstName}</b><br />Change to: 
                 <input
                     name="firstName"
@@ -124,18 +134,31 @@ function PlayerChangeForm( { allPlayers,
                 />
             </label> 
             <p></p>
-            <label>Player Position: <b>{selectedPlayer.position}</b><br />Change to:
+            <label>Player Position: <b>{selectedPlayer.position}</b><br />Change to:<br />
                 <input
+                    type="radio"
                     name="position"
-                    type="text"
-                    placeholder='position'
-                    onChange={handleChange}
-                    value={formValues.position}
-                />
+                    value="Forward"
+                    onChange={handleRadioChange}
+                    checked={radioValue === "Forward"}
+                />Forward<br />
+                <input
+                    type="radio"
+                    name="position"
+                    value="Defense"
+                    onChange={handleRadioChange}
+                    checked={radioValue === "Defense"}
+                />Defense<br />
+                <input
+                    type="radio"
+                    name="position"
+                    value="Goalie"
+                    onChange={handleRadioChange}
+                    checked={radioValue === "Goalie"}
+                />Goalie
             </label> 
             <p></p>
             <Button variant="outline-success" onClick={handleFormSubmit}>Submit Info</Button>
-            <Button variant="danger" onClick={handleRemovePlayer}>Remove This Player</Button>
         </form>
     </>
   )
