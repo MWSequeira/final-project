@@ -14,6 +14,10 @@ function NavBar() {
         <Link to="/add-sub">
           <Button variant="outline-success">Add A Sub</Button>
         </Link>
+               
+        <Link to="/add-player">
+          <Button variant="outline-success">Add a Player</Button>
+        </Link>
 
         <Link to="/update-player">
           <Button variant="outline-primary">Update Player Info</Button>
@@ -22,10 +26,7 @@ function NavBar() {
         <Link to="/player-schedule">
           <Button variant="outline-primary">Check Player Schedule</Button>
         </Link>
-       
-        <Link to="/add-player">
-          <Button variant="outline-success">Add a Player</Button>
-        </Link>
+
       </ButtonGroup>
     </div>
   )

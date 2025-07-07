@@ -37,7 +37,7 @@ function AddPlayerForm( { allPlayers,
             lastName: formValues.lastName,
             phone: formValues.phone,
             position: formValues.position,
-            playerId: allPlayers.length,
+            playerId: allPlayers.length + 1, // results from how the playerIds were assigned
             teamName: "Subs List",
             playerHistory: [allPlayers.length, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
@@ -45,7 +45,7 @@ function AddPlayerForm( { allPlayers,
         console.log(newPlayer)
 
         setAllPlayers([...allPlayers, newPlayer])
-        console.log(allPlayers)
+        alert("Player Added")
         updateAllPlayers() // trigger an update to the backend
     }
 

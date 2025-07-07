@@ -5,7 +5,7 @@ import type { PlayerType } from './ExportTypes'
 import type { GameType } from './ExportTypes'
 
 type UpdatePlayersProps = {
-  allPlayers: PlayerType,
+  allPlayers: PlayerType[],
   selectedPlayer: PlayerType,
   setSelectedPlayer: (newValue: PlayerType) => void,
   loadingPlayers: boolean,
@@ -22,6 +22,8 @@ function UpdatePlayers( { allPlayers,
   selectedGame,
   gameSched }: UpdatePlayersProps) {
 
+    const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
+
   return (
     <div className='addNewPlayer'>
       { loadingPlayers && <p>Loading...</p> }
@@ -30,13 +32,12 @@ function UpdatePlayers( { allPlayers,
       <Container>
         <Row>
           <h2>Make Changes</h2>
-          <p>Change a player's information or league schedule</p>
         </Row>
         <Row>
-        <p>Choose a Player</p>
-                {allPlayers.map(player => <div key={player.playerId}>
-                    <Link to={"/change/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
-                </div>)}
+          <p>Change a player's information or league schedule. Choose a Player</p>
+            {currentPlayers.map(player => <div key={player.playerId}>
+                <Link to={"/change/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
+            </div>)}
         </Row>
       </Container>
       

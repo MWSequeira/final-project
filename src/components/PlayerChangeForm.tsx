@@ -47,7 +47,7 @@ function PlayerChangeForm( { allPlayers,
         [event.target.name]: event.target.value 
     })
 
-    // make changes to the player's data
+    // handling changes to the player's data
     const handleFormSubmit = (event: MouseEvent) => {
         event.preventDefault() // to keep the page from refreshing
         setAllPlayers(allPlayers.map(player =>(
@@ -58,9 +58,31 @@ function PlayerChangeForm( { allPlayers,
                 position: formValues.position
             }
         ) ))
+        updateAllPlayers() // trigger an update to the backend
+    }
+
+    // handling removal of the player
+    const handleRemovePlayer = (event: MouseEvent) => {
+        event.preventDefault() // keep the page from refreshing
+        
+        // the player's history will be removed, but the info will still be available.
+        // I'm structuring player removal this way so that logic can later be added to allow the league to show the player's history before he left (i.e. if he played in previous games)
+        let playerHistory:Array<number> = selectedPlayer.playerHistory // get the playerHistory array
+        // there's propbaby a more elegant way to update the history, but this code works
+        let historyCopy = playerHistory.slice() // copy the history array for the sub
+        historyCopy.splice(1, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) // replace all the game elements with a 0 
+        console.log(historyCopy)
+
+        // update the allPlayers state so that this player will not show
+         setAllPlayers(allPlayers.map(player => (
+          player.playerId !== selectedPlayer.playerId ? player: {
+          ...player, playerHistory: historyCopy, teamName: "Removed" }
+        )))
+        alert("Player removed")
         console.log(allPlayers)
         updateAllPlayers() // trigger an update to the backend
     }
+
 
   return (
     <>
@@ -112,6 +134,7 @@ function PlayerChangeForm( { allPlayers,
             </label> 
             <p></p>
             <Button variant="outline-success" onClick={handleFormSubmit}>Submit Info</Button>
+            <Button variant="danger" onClick={handleRemovePlayer}>Remove This Player</Button>
         </form>
     </>
   )
