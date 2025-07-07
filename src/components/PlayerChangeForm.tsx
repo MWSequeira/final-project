@@ -72,7 +72,6 @@ function PlayerChangeForm( { allPlayers,
         // there's propbaby a more elegant way to update the history, but this code works
         let historyCopy = playerHistory.slice() // copy the history array for the sub
         historyCopy.splice(1, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) // replace all the game elements with a 0 
-        console.log(historyCopy)
 
         // update the allPlayers state so that this player will not show
          setAllPlayers(allPlayers.map(player => (
@@ -80,7 +79,6 @@ function PlayerChangeForm( { allPlayers,
           ...player, playerHistory: historyCopy, teamName: "Removed" }
         )))
         alert("Player removed")
-        console.log(allPlayers)
         updateAllPlayers() // trigger an update to the backend
     }
 
