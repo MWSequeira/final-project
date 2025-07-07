@@ -26,7 +26,7 @@ function AddSubPage( { selectedGame,
   })
 
   // small functions for this component
-  let availPlayers:PlayerType[] = allPlayers.filter(player => player.teamName != selectedGame.team1 && player.teamName !== selectedGame.team2 && player.playerHistory[selectedGame.gameId] !== 5)
+  let availPlayers:PlayerType[] = allPlayers.filter(player => player.teamName != selectedGame.team1 && player.teamName !== selectedGame.team2 && player.teamName !== "Removed" && player.playerHistory[selectedGame.gameId] !== 5)
 
   // state for the Modal
   const [show, setShow] = useState(false);
