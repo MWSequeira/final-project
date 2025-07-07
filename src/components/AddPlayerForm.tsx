@@ -1,36 +1,17 @@
 import { useState } from "react"
-import { useParams } from "react-router-dom"
 import { Button } from "react-bootstrap"
-import type { PlayerType, GameType} from "./ExportTypes"
+import type { PlayerType } from "./ExportTypes"
 
-type PlayerChangeFormProps ={
-    allPlayers: PlayerType,
+type AddPlayerFormProps = {
+    allPlayers: [PlayerType],
     setAllPlayers: (newValue:PlayerType) => void,
-    selectedPlayer: PlayerType,
-    setSelectedPlayer: (newValue:PlayerType) => void,
-    loadingPlayers: boolean,
-    errorPlayers: string | null,
-    updateAllPlayers: () => void,
-    selectedGame: GameType,
-    gameSched: GameType[]
+    updateAllPlayers: () => void
 }
 
-function PlayerChangeForm( { allPlayers,
+function AddPlayerForm( { allPlayers,
     setAllPlayers,
-    selectedPlayer,
-    setSelectedPlayer,
-    loadingPlayers,
-    errorPlayers,
-    updateAllPlayers,
-    selectedGame,
-    gameSched }: PlayerChangeFormProps) {
+    updateAllPlayers }: AddPlayerFormProps) {
 
-
-
-    const { playerId } = useParams()
-
-    let chosenPlayerId = parseInt(playerId) // playerId is passed as a string; the prop is a number
-    setSelectedPlayer(allPlayers.find(player => player.playerId === chosenPlayerId))
 
     // state used in this form
     const[formValues, setFormValues] = useState({
@@ -46,32 +27,34 @@ function PlayerChangeForm( { allPlayers,
         ...formValues, 
         [event.target.name]: event.target.value 
     })
-
+    
     // make changes to the player's data
     const handleFormSubmit = (event: MouseEvent) => {
         event.preventDefault() // to keep the page from refreshing
-        setAllPlayers(allPlayers.map(player =>(
-            player.playerId !== selectedPlayer.playerId ? player: {
-                ...player, firstName: formValues.firstName, 
-                lastName: formValues.lastName,
-                phone: formValues.phone,
-                position: formValues.position
-            }
-        ) ))
+
+        let newPlayer = {
+            firstName: formValues.firstName,
+            lastName: formValues.lastName,
+            phone: formValues.phone,
+            position: formValues.position,
+            playerId: allPlayers.length,
+            teamName: "Subs List",
+            playerHistory: [allPlayers.length, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+
+        console.log(newPlayer)
+
+        setAllPlayers([...allPlayers, newPlayer])
         console.log(allPlayers)
         updateAllPlayers() // trigger an update to the backend
     }
 
   return (
     <>
-        { loadingPlayers && <p>Loading...</p> }
-        { errorPlayers && <p>{errorPlayers}</p> }
+
         <form>
             <p></p>
-            <p className="alert">Sorry, but you'll have to re-enter all of your information.<br/>
-            <b>All fields must be filled</b> or your data will be lost.<br />
-            For your convenience, your current information is provided for you to copy and paste into the fields.</p>
-            <label>First Name: <b>{selectedPlayer.firstName}</b><br />Change to: 
+            <label>First Name:  
                 <input
                     name="firstName"
                     type="text"
@@ -81,7 +64,7 @@ function PlayerChangeForm( { allPlayers,
                 />
             </label> 
             <p></p>
-            <label>Last Name: <b>{selectedPlayer.lastName}</b><br /> Change to: 
+            <label>Last Name: 
                 <input
                     name="lastName"
                     type="text"
@@ -91,7 +74,7 @@ function PlayerChangeForm( { allPlayers,
                 />
             </label> 
             <p></p>
-            <label>Phone Number: <b>{selectedPlayer.phone}</b><br />Change to:
+            <label>Phone Number: 
                 <input
                     name="phone"
                     type="text"
@@ -101,7 +84,7 @@ function PlayerChangeForm( { allPlayers,
                 />
             </label> 
             <p></p>
-            <label>Player Position: <b>{selectedPlayer.position}</b><br />Change to:
+            <label>Player Position: 
                 <input
                     name="position"
                     type="text"
@@ -117,4 +100,4 @@ function PlayerChangeForm( { allPlayers,
   )
 }
 
-export default PlayerChangeForm
+export default AddPlayerForm

@@ -17,6 +17,7 @@ import UpdatePlayers from './components/UpdatePlayers'
 // import types
 import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
 import PlayerChangeForm from './components/PlayerChangeForm'
+import AddPlayerForm from './components/AddPlayerForm'
 
 function App() {
   // data locations
@@ -232,7 +233,14 @@ function App() {
               errorPlayers={errorPlayers}
               selectedGame={selectedGame}
               gameSched={gameSched}
+              updateAllPlayers={updateAllPlayers}
           />}/>
+          <Route path="/add-player"
+            element={<AddPlayerForm 
+              allPlayers={allPlayers}
+              setAllPlayers={setAllPlayers}
+              updateAllPlayers={updateAllPlayers}
+          />} />
       </Routes>
 
     </>
