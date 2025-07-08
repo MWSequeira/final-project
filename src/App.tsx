@@ -26,7 +26,7 @@ function App() {
   const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
   // pieces of state needed throughout the app
-  const [selectedGame, setSelectedGame] = useState<[GameType]>()
+  const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
   const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>()
   const [changedHistory, setChangedHistory] = useState(false)
 
