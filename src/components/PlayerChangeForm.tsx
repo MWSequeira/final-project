@@ -6,9 +6,9 @@ import type { PlayerType, GameType} from "./ExportTypes"
 
 type PlayerChangeFormProps ={
     allPlayers: [PlayerType],
-    setAllPlayers: (newValue:PlayerType | null) => void,
+    setAllPlayers: (newValue:PlayerType[] | undefined) => void,
     selectedPlayer: PlayerType,
-    setSelectedPlayer: (newValue: PlayerType | null) => void,
+    setSelectedPlayer: (newValue: PlayerType | undefined) => void,
     loadingPlayers: boolean,
     errorPlayers: string | null,
     updateAllPlayers: () => void,
@@ -87,34 +87,36 @@ function PlayerChangeForm( { allPlayers,
         const altAnswer = (something !== somethingElse) ? something : somethingElse // altAnswer is a
         console.log("altAnswer", altAnswer)
 
-        let playerToRemove = ({...selectedPlayer, playerHistory: historyCopy})
-        let updatedPlayerToRemove = ({...playerToRemove, teamName: "Removed"})
-        console.log("updatedPlayerToRemove", updatedPlayerToRemove)
+        // let playerToRemove = ({...selectedPlayer, playerHistory: historyCopy})
+        // let updatedPlayerToRemove = ({...playerToRemove, teamName: "Removed"})
+        // console.log("updatedPlayerToRemove", updatedPlayerToRemove)
 
-        let arrayToSend = allPlayers.map(player => player.playerId === playerToRemove.playerId ? playerToRemove : player)
-        console.log("arrayToSend", arrayToSend)
+        // let arrayToSend = allPlayers.map(player => player.playerId === playerToRemove.playerId ? playerToRemove : player)
+        // console.log("arrayToSend", arrayToSend)
 
-        //    const updatedPlayerHistory = selectedPlayer.playerHistory.map(()=>{
-        //       return 0;
-        //    })
+           const updatedPlayerHistory = selectedPlayer.playerHistory.map(()=>{
+              return 0;
+           })
         //    console.log(updatedPlayerHistory);
         //    console.log('player History',historyCopy);
         //    console.log(allPlayers);
-        //    const updatedTeamPlayers = allPlayers.map((player)=> {
-        //    if( player.playerId === selectedPlayer.playerId){
-        //     player.playerHistory = updatedPlayerHistory;
-        //    }
-        //    return player;
-        // }
+           const updatedTeamPlayers = allPlayers.map((player)=> {
+           if( player.playerId === selectedPlayer.playerId){
+            player.playerHistory = updatedPlayerHistory;
+            player.teamName = "Removed";
+           }
+           return player;
+        });
+        console.log('updatedTeamPlayers',updatedTeamPlayers)
         // console.log('choosen player',updatedTeamPlayers)
         // update the allPlayers state so that this player will not show
         //  setAllPlayers(allPlayers.map(player => (
         //   player.playerId !== selectedPlayer.playerId ? player: {
         //   ...player, playerHistory: [], teamName: "Removed" }
         // )))
-       // setAllPlayers(())
+        setAllPlayers(updatedTeamPlayers);
         alert("Player removed")
-       // updateAllPlayers() // trigger an update to the backend
+        updateAllPlayers();
     }
         // const number = number ? do something : do another thing
 

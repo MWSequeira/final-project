@@ -26,7 +26,7 @@ function App() {
   const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
   // pieces of state needed throughout the app
-  const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
+  const [selectedGame, setSelectedGame] = useState<[GameType]>()
   const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>()
   const [changedHistory, setChangedHistory] = useState(false)
 
@@ -39,7 +39,7 @@ function App() {
   const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
   const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
 
-  const [allPlayers, setAllPlayers] = useState<[PlayerType]>([])
+  const [allPlayers, setAllPlayers] = useState<PlayerType[]>([])
   const [loadingPlayers, setLoadingPlayers] = useState([]) // whether we're loading or not
   const [errorPlayers, setErrorPlayers] = useState<null | string>() // whether we've run into an error
 
