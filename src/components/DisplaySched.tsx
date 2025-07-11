@@ -1,10 +1,13 @@
-import { Container, Row, Col } from "react-bootstrap"
+// RENDER THE SCHEDULE FOR THE SELECTED PLAYER
+
+import { Container, Row } from "react-bootstrap"
 import type { GameType, PlayerType } from "./ExportTypes"
 
 type DisplaySchedProps = {
-    selectedPlayer: PlayerType[],
-    gameSched: GameType[]
+    selectedPlayer: PlayerType,
+    gameSched: GameType
 }
+
 
 function DisplaySched( { selectedPlayer,gameSched }: DisplaySchedProps) {
 
@@ -15,7 +18,7 @@ function DisplaySched( { selectedPlayer,gameSched }: DisplaySchedProps) {
     <Container>
         <Row>
             <h1>{selectedPlayer.firstName}'s schedule</h1> 
-            <p>{selectedPlayer.firstName} {selectedPlayer.lastName}, {selectedPlayer.position}</p>
+            <p>{selectedPlayer.firstName} {selectedPlayer.lastName}, {selectedPlayer.position}, {selectedPlayer.phone}</p>
             <h2>Team: {selectedPlayer.teamName}</h2>
         </Row>
         <Row>

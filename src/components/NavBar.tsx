@@ -1,5 +1,8 @@
+// RENDERS THE TOP NAVIGATION BUTTONS AND LINKS
+
 import { ButtonGroup, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
 
 function NavBar() {
   return (

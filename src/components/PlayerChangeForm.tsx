@@ -1,3 +1,5 @@
+// RENDERS THE CHANGE FORM, GATHERS THE INFO AND UPDATES THE PLAYERS DATA (INCLUDING REMOVAL)
+
 import { useState, type ChangeEvent } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "react-bootstrap"
@@ -15,6 +17,7 @@ type PlayerChangeFormProps ={
     selectedGame: GameType,
     gameSched: GameType[]
 }
+
 
 function PlayerChangeForm( { allPlayers,
     setAllPlayers,
@@ -70,15 +73,7 @@ function PlayerChangeForm( { allPlayers,
     // handling removal of the player
     const handleRemovePlayer = (event: MouseEvent) => {
         event.preventDefault() // keep the page from refreshing
-        // the player's history will be removed, but the info will still be available.
-        // I'm structuring player removal this way so that logic can later be added to allow the league to show the player's history before he left (i.e. if he played in previous games)
-        let playerHistory:Array<number> = selectedPlayer.playerHistory // get the playerHistory array
-        // there's propbaby a more elegant way to update the history, but this code works
-        let historyCopy = playerHistory.slice() // copy the history array for the sub
-        historyCopy.splice(1, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) // replace all the game elements with a 0 
-
-
-
+        
         const updatedPlayerHistory = selectedPlayer.playerHistory.map(()=>{
             return 0;
         })

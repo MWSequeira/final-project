@@ -1,3 +1,5 @@
+// TYPES USED THROUGHOUT
+
 export type PlayerType = {
   firstName: string,
   lastName: string,

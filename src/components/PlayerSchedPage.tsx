@@ -1,5 +1,7 @@
-import type { PlayerType, GameType } from "./ExportTypes"
-import { Container, Row, Col } from "react-bootstrap"
+// RENDERS THE LIST OF CURRENT PLAYERS WITH LINKS TO EACH PLAYER
+
+import type { PlayerType  } from "./ExportTypes"
+import { Container, Row  } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 type PlayerSchedPageProps = {
@@ -8,31 +10,35 @@ type PlayerSchedPageProps = {
     errorPlayers: string | null
 }
 
-function PlayerSchedPage( { allPlayers, loadingPlayers, errorPlayers }: PlayerSchedPageProps) {
+
+function PlayerSchedPage( { allPlayers, 
+    loadingPlayers, 
+    errorPlayers 
+    }: PlayerSchedPageProps) {
     
-const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
+    const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
 
-  return (
-    <div>
-        { loadingPlayers && <p>Loading...</p> }
-        { errorPlayers && <p> {errorPlayers}</p> }
-        <Container>
-            <Row>
-            <h1>Player Schedules</h1>
-            </Row>
-            <Row>
+    return (
+        <div>
+            { loadingPlayers && <p>Loading...</p> }
+            { errorPlayers && <p> {errorPlayers}</p> }
+            <Container>
+                <Row>
+                <h1>Player Schedules</h1>
+                </Row>
+                <Row>
 
-                <p>Choose a Player</p>
-                {currentPlayers.map(player => <div key={player.playerId}>
-                    <Link to={"/scheds/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
-                </div>)}
+                    <p>Choose a Player</p>
+                    {currentPlayers.map(player => <div key={player.playerId}>
+                        <Link to={"/scheds/" + player.playerId}>{player.firstName} {player.lastName}</Link>, {player.position}
+                    </div>)}
 
-            </Row>
+                </Row>
 
-        </Container>
-        
-    </div>
-  )
+            </Container>
+            
+        </div>
+    )
 }
 
 export default PlayerSchedPage

@@ -1,3 +1,5 @@
+// TOP LEVEL RENDERING AND BACKEND FUNCTIONS
+
 import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
@@ -18,6 +20,7 @@ import UpdatePlayers from './components/UpdatePlayers'
 import type { GameType, PlayerType, TeamsType } from './components/ExportTypes'
 import PlayerChangeForm from './components/PlayerChangeForm'
 import AddPlayerForm from './components/AddPlayerForm'
+
 
 function App() {
   // data locations
@@ -162,6 +165,7 @@ function App() {
     }
     }
 
+  
   return (
     <>
       <NavBar />

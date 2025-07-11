@@ -1,13 +1,16 @@
+// USES THE GAME ID TO CREATE THE PAGE THAT RENDERS THE INFO ABOUT THE GAME
+
 import { useParams } from 'react-router-dom'
 import type { GameType, PlayerType } from './ExportTypes'
 import DisplayGames from './DisplayGames'
 
 type GameDetailsProps ={
-    gameSched: GameType[],
+    gameSched: GameType,
     allPlayers: PlayerType[],
     selectedGame: GameType[],
     setSelectedGame: (newValue: GameType) => void
 }
+ 
 
 function GameDetails({ gameSched, 
     allPlayers,

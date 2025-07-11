@@ -1,13 +1,15 @@
+// RENDER THE FORM TO GATHER INFO ON THE NEW PLAYER
+
 import { useState } from "react"
 import { Button } from "react-bootstrap"
 import type { PlayerType } from "./ExportTypes"
-import GamesListPage from "./GamesListPage"
 
 type AddPlayerFormProps = {
     allPlayers: [PlayerType],
     setAllPlayers: (newValue:PlayerType) => void,
     updateAllPlayers: () => void
 }
+
 
 function AddPlayerForm( { allPlayers,
     setAllPlayers,
@@ -115,7 +117,7 @@ function AddPlayerForm( { allPlayers,
                 />Goalie
             </label> 
             <p></p>
-            <Button variant="outline-success" onClick={handleFormSubmit}>Submit Info</Button>
+            <Button variant="success" onClick={handleFormSubmit}>Submit Info</Button>
         </form>
     </>
   )

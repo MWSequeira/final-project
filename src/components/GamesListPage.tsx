@@ -1,3 +1,5 @@
+// RENDER THE LIST OF ALL GAMES WITH LINKS TO EACH GAME
+
 import type { GameType } from './ExportTypes'
 import { Link } from 'react-router-dom'
 
@@ -6,6 +8,7 @@ type GamesListProps = {
   loadingGames: boolean,
   errorGames: string
 }
+
 
 function GamesListPage( {gameSched,
   loadingGames,

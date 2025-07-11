@@ -1,4 +1,5 @@
-import { useState } from 'react'
+// RENDERS THE LIST OF CURRENT PLAYERS WITH LINKS TO THE UPDATE FORM
+
 import { Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import type { PlayerType } from './ExportTypes'
@@ -14,13 +15,11 @@ type UpdatePlayersProps = {
   gameSched: GameType
 }
 
+
 function UpdatePlayers( { allPlayers,
-  selectedPlayer,
-  setSelectedPlayer,
   loadingPlayers,
-  errorPlayers,
-  selectedGame,
-  gameSched }: UpdatePlayersProps) {
+  errorPlayers
+  }: UpdatePlayersProps) {
 
   const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
 

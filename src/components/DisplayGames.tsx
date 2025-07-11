@@ -1,3 +1,5 @@
+// RENDER THE GAME INFO WITH THE TEAM ROSTERS AND SUBS LIST
+
 import { Container, Row, Col } from 'react-bootstrap'
 import type { GameType, PlayerType } from './ExportTypes'
 
@@ -6,6 +8,7 @@ type DisplayGamesProps = {
     selectedGame: GameType[]
 }
 
+
 function DisplayGames( { allPlayers, 
     selectedGame }: DisplayGamesProps) {
 
@@ -13,7 +16,6 @@ function DisplayGames( { allPlayers,
     let team1Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team1)
     let team2Roster:PlayerType[] = allPlayers.filter(player => player.teamName === selectedGame.team2)
     let gameSubs:PlayerType[] = allPlayers.filter(player => player.playerHistory[selectedGame.gameId] === 5)
-
 
   return (
     <Container>

@@ -1,3 +1,5 @@
+// USES THE PLAYER ID TO CREATE THE PAGE THAT RENDERS THE GAMES THAT PLAYER IS SCHEDULED FOR
+
 import { useParams } from 'react-router-dom'
 import type { GameType, PlayerType } from './ExportTypes'
 import DisplaySched from './DisplaySched'
@@ -8,6 +10,7 @@ type PlayerSchedProps = {
     selectedPlayer: PlayerType[],
     setSelectedPlayer: (newValue: PlayerType) => void
 }
+
 
 function PlayerSched( { allPlayers, 
     gameSched,

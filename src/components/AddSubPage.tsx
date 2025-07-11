@@ -1,3 +1,5 @@
+// RENDERS GAME INFO AND AVAILABLE PLAYERS AND USES A MODAL TO ADD A SUB
+
 import { Container, Col, Row } from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { useState, type ChangeEvent } from 'react'
@@ -8,15 +10,14 @@ type AddSubPageProps = {
   selectedGame: GameType,
   allPlayers: PlayerType,
   setAllPlayers: (newValue: PlayerType) => void,
-  changedHistory: boolean,
-  setChangedHistory: (newValue) => void
+  updateAllPlayers: () => void
 }
+
 
 function AddSubPage( { selectedGame,
   allPlayers,
   setAllPlayers,
-  updateAllPlayers,
-  setChangedHistory
+  updateAllPlayers
    }: AddSubPageProps) {
 
   // state variables for the form -- in progress values
@@ -50,7 +51,7 @@ function AddSubPage( { selectedGame,
     // there's propbaby a more elegant way to update the history, but this code works
     let historyCopy = chosenSubHistory.slice() // copy the history array for the sub
     historyCopy.splice(selectedGame.gameId, 1, 5) // replace the element at the gameId with a 5 
-    
+
     // update the allPlayers state so that the subs will show for each game
      setAllPlayers(allPlayers.map(player => (
       player.playerId !== playerIdNo ? player: {
@@ -65,11 +66,11 @@ function AddSubPage( { selectedGame,
   
 
   return (
-    <div className='addSubPage'>
+    <div>
 
       <Container>
         <Row>
-        <Button variant="outline-primary" onClick={handleShow}>
+        <Button variant="success" onClick={handleShow}>
                 Add a Sub to Game {selectedGame.gameId}
         </Button>
         </Row>

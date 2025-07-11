@@ -29,13 +29,8 @@ body {
 }
 
 
-.addSubPage {
-  border: solid blue 2px;
-}
-
-
 .gamesList {
-  border: solid blue 2px;
+  border: solid lightgray 2px;
   text-align: left;
   padding: 2rem
 }
@@ -43,4 +38,9 @@ body {
 .alert {
   border: solid red 2px;
   padding: 2 rem
+}
+
+.addNewPlayer {
+  border: solid lightsteelblue 2px;
+  padding: 2rem
 }
