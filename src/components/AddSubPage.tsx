@@ -50,7 +50,7 @@ function AddSubPage( { selectedGame,
     // there's propbaby a more elegant way to update the history, but this code works
     let historyCopy = chosenSubHistory.slice() // copy the history array for the sub
     historyCopy.splice(selectedGame.gameId, 1, 5) // replace the element at the gameId with a 5 
-    console.log(historyCopy)
+    
     // update the allPlayers state so that the subs will show for each game
      setAllPlayers(allPlayers.map(player => (
       player.playerId !== playerIdNo ? player: {

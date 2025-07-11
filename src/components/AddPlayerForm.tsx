@@ -50,11 +50,9 @@ function AddPlayerForm( { allPlayers,
             playerHistory: [allPlayers.length, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
 
-        console.log(newPlayer)
 
         setAllPlayers([...allPlayers, newPlayer])
         alert("Player Added")
-        console.log(allPlayers)
         updateAllPlayers() // trigger an update to the backend
     }
 

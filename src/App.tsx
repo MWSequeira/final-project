@@ -138,7 +138,6 @@ function App() {
 
   // UPDATE THE PLAYER DATA ON THE BACKEND WHEN NEEDED   
   const updateAllPlayers = async () => {
-   console.log(allPlayers)
     try {
       const response = await fetch(allPlayersBinUrl, {
         method: "PUT",
@@ -161,8 +160,6 @@ function App() {
     } catch(error: any) {
       setErrorPlayers("Error: " + error.message)
     }
-    
-    console.log("updating backend")
     }
 
   return (
