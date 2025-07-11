@@ -22,9 +22,8 @@ function PlayerChangeForm( { allPlayers,
     setSelectedPlayer,
     loadingPlayers,
     errorPlayers,
-    updateAllPlayers,
-    selectedGame,
-    gameSched }: PlayerChangeFormProps) {
+    updateAllPlayers
+     }: PlayerChangeFormProps) {
 
     const { playerId } = useParams()
 
@@ -77,29 +76,13 @@ function PlayerChangeForm( { allPlayers,
         // there's propbaby a more elegant way to update the history, but this code works
         let historyCopy = playerHistory.slice() // copy the history array for the sub
         historyCopy.splice(1, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) // replace all the game elements with a 0 
-        console.log("historyCopy", historyCopy)
-        console.log(selectedPlayer)
 
-        let something = "a"
-        let somethingElse = "b"
-        const answer = (something === somethingElse) ? something : somethingElse // answer is b
-        console.log("answer", answer)
-        const altAnswer = (something !== somethingElse) ? something : somethingElse // altAnswer is a
-        console.log("altAnswer", altAnswer)
 
-        // let playerToRemove = ({...selectedPlayer, playerHistory: historyCopy})
-        // let updatedPlayerToRemove = ({...playerToRemove, teamName: "Removed"})
-        // console.log("updatedPlayerToRemove", updatedPlayerToRemove)
 
-        // let arrayToSend = allPlayers.map(player => player.playerId === playerToRemove.playerId ? playerToRemove : player)
-        // console.log("arrayToSend", arrayToSend)
+        const updatedPlayerHistory = selectedPlayer.playerHistory.map(()=>{
+            return 0;
+        })
 
-           const updatedPlayerHistory = selectedPlayer.playerHistory.map(()=>{
-              return 0;
-           })
-        //    console.log(updatedPlayerHistory);
-        //    console.log('player History',historyCopy);
-        //    console.log(allPlayers);
            const updatedTeamPlayers = allPlayers.map((player)=> {
            if( player.playerId === selectedPlayer.playerId){
             player.playerHistory = updatedPlayerHistory;
@@ -107,13 +90,7 @@ function PlayerChangeForm( { allPlayers,
            }
            return player;
         });
-        console.log('updatedTeamPlayers',updatedTeamPlayers)
-        // console.log('choosen player',updatedTeamPlayers)
-        // update the allPlayers state so that this player will not show
-        //  setAllPlayers(allPlayers.map(player => (
-        //   player.playerId !== selectedPlayer.playerId ? player: {
-        //   ...player, playerHistory: [], teamName: "Removed" }
-        // )))
+
         setAllPlayers(updatedTeamPlayers);
         alert("Player removed")
         updateAllPlayers();

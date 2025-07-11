@@ -4,13 +4,11 @@ import { Link } from "react-router-dom"
 
 type PlayerSchedPageProps = {
     allPlayers: PlayerType[],
-    gameSched: GameType[],
-    selectedPlayer: PlayerType[],
     loadingPlayers: boolean,
     errorPlayers: string | null
 }
 
-function PlayerSchedPage( { allPlayers, selectedPlayer, gameSched, loadingPlayers, errorPlayers }: PlayerSchedPageProps) {
+function PlayerSchedPage( { allPlayers, loadingPlayers, errorPlayers }: PlayerSchedPageProps) {
     
 const currentPlayers = allPlayers.filter(player => player.teamName !== "Removed")
 

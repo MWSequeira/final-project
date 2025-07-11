@@ -18,8 +18,7 @@ function AddPlayerForm( { allPlayers,
     const[formValues, setFormValues] = useState({
         firstName: "first name",
         lastName: "last name",
-        phone: "XXX-xxx-xxxx",
-        position: "position"
+        phone: "XXX-xxx-xxxx"
     })
 
     // handling changes in the form
@@ -28,6 +27,14 @@ function AddPlayerForm( { allPlayers,
         ...formValues, 
         [event.target.name]: event.target.value 
     })
+
+    // state for the radio buttons
+        const[radioValue, setRadioValue] = useState("Defense")
+    
+    // handling radio button changes in the form
+    const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setRadioValue(event.target.value)
+        }
     
     // make changes to the player's data
     const handleFormSubmit = (event: MouseEvent) => {
@@ -37,7 +44,7 @@ function AddPlayerForm( { allPlayers,
             firstName: formValues.firstName,
             lastName: formValues.lastName,
             phone: formValues.phone,
-            position: formValues.position,
+            position: radioValue,
             playerId: allPlayers.length + 1, // results from how the playerIds were assigned
             teamName: "Subs List",
             playerHistory: [allPlayers.length, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -86,14 +93,28 @@ function AddPlayerForm( { allPlayers,
                 />
             </label> 
             <p></p>
-            <label>Player Position: 
+            <label>Player Position: <br />
                 <input
+                    type="radio"
                     name="position"
-                    type="text"
-                    placeholder='position'
-                    onChange={handleChange}
-                    value={formValues.position}
-                />
+                    value="Forward"
+                    onChange={handleRadioChange}
+                    checked={radioValue === "Forward"}
+                />Forward<br />
+                <input
+                    type="radio"
+                    name="position"
+                    value="Defense"
+                    onChange={handleRadioChange}
+                    checked={radioValue === "Defense"}
+                />Defense<br />
+                <input
+                    type="radio"
+                    name="position"
+                    value="Goalie"
+                    onChange={handleRadioChange}
+                    checked={radioValue === "Goalie"}
+                />Goalie
             </label> 
             <p></p>
             <Button variant="outline-success" onClick={handleFormSubmit}>Submit Info</Button>

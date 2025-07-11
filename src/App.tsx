@@ -26,7 +26,7 @@ function App() {
   const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
   // pieces of state needed throughout the app
-  const [selectedGame, setSelectedGame] = useState<[GameType]>([[0, "Team1", "Team2", "date", "time"]])
+  const [selectedGame, setSelectedGame] = useState<[GameType]>({gameId: 0, team1: "Team1", team2: "Team2", date: "date", time: "time"})
   const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>()
   const [changedHistory, setChangedHistory] = useState(false)
 
@@ -35,7 +35,7 @@ function App() {
   const [loadingGames, setLoadingGames] = useState([]) // whether we're loading or not
   const [errorGames, setErrorGames] = useState<null | string>() // whether we've run into an error
 
-  const [teams, setTeams] = useState<[TeamsType]>([[0, "Select a Team"]]) // data to load
+  const [teams, setTeams] = useState<[TeamsType]>([{teamId: 0, teamName: "Select a Team"}]) // data to load
   const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
   const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
 
@@ -151,7 +151,7 @@ function App() {
       )
       // check for a bad response error
       if (!response.ok) {
-        setErrorHistories("Error: " + response.statusText)
+        setErrorPlayers("Error: " + response.statusText)
       } else {
         // const data:PlayerType = await response.json()
         // const allPlayerArray = data[0]
@@ -159,7 +159,7 @@ function App() {
         
       }   
     } catch(error: any) {
-      setErrorHistories("Error: " + error.message)
+      setErrorPlayers("Error: " + error.message)
     }
     
     console.log("updating backend")
