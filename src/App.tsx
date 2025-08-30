@@ -1,8 +1,8 @@
 // TOP LEVEL RENDERING AND BACKEND FUNCTIONS
-
 import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { MY_API_KEY } from '../MY_API_KEY'
 
 // import styles
 import './App.css'
@@ -34,13 +34,13 @@ function App() {
   const [changedHistory, setChangedHistory] = useState(false)
 
   // each state needs three pieces of state to fetch data from the backend
-  const [gameSched, setGameSched] = useState<[GameType]>([]) // data we're trying to load
+  const [gameSched, setGameSched] = useState<[GameType]>([{gameId: 0, team1: "Waiting", team2: "Waiting", date: "Waiting", time: "Waiting"}]) // data we're trying to load
   const [loadingGames, setLoadingGames] = useState([]) // whether we're loading or not
   const [errorGames, setErrorGames] = useState<null | string>() // whether we've run into an error
 
   const [teams, setTeams] = useState<[TeamsType]>([{teamId: 0, teamName: "Select a Team"}]) // data to load
-  const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
-  const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
+  // const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
+  // const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
 
   const [allPlayers, setAllPlayers] = useState<PlayerType[]>([])
   const [loadingPlayers, setLoadingPlayers] = useState([]) // whether we're loading or not
