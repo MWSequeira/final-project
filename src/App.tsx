@@ -39,8 +39,8 @@ function App() {
   const [errorGames, setErrorGames] = useState<null | string>() // whether we've run into an error
 
   const [teams, setTeams] = useState<[TeamsType]>([{teamId: 0, teamName: "Select a Team"}]) // data to load
-  // const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
-  // const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
+  const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
+  const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
 
   const [allPlayers, setAllPlayers] = useState<PlayerType[]>([])
   const [loadingPlayers, setLoadingPlayers] = useState([]) // whether we're loading or not
@@ -67,7 +67,8 @@ function App() {
         if (!response.ok) {
           setErrorGames("Error: " + response.statusText)
         } else {
-          const data:GameType = await response.json()
+          const data:GameType | null = await response.json()
+          console.log("array", data)
           const gameSchedArray = data[0]
           setGameSched(gameSchedArray)
         }   
