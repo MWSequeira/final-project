@@ -1,11 +1,11 @@
-// TOP LEVEL RENDERING AND BACKEND FUNCTIONS
-import { Routes, Route } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import { MY_API_KEY } from '../MY_API_KEY'
-
 // import styles
 import './App.css'
+
+// TOP LEVEL RENDERING AND BACKEND FUNCTIONS
+import { useState, useEffect } from 'react'
+// import { MY_API_KEY } from '../MY_API_KEY'//uncomment for production
+import { Routes, Route } from 'react-router-dom'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 // import pages and elements to appear on each page
 import NavBar from './components/NavBar'
@@ -29,22 +29,23 @@ function App() {
   const allPlayersBinUrl = "https://api.jsonbin.io/v3/b/68619e538a456b7966b83828"
   
   // pieces of state needed throughout the app
-  const [selectedGame, setSelectedGame] = useState<[GameType]>({gameId: 0, team1: "Team1", team2: "Team2", date: "date", time: "time"})
+  const [selectedGame, setSelectedGame] = useState<GameType[] | null>(null)
   const [selectedPlayer, setSelectedPlayer] = useState<[PlayerType]>()
   const [changedHistory, setChangedHistory] = useState(false)
 
   // each state needs three pieces of state to fetch data from the backend
-  const [gameSched, setGameSched] = useState<[GameType]>([{gameId: 0, team1: "Waiting", team2: "Waiting", date: "Waiting", time: "Waiting"}]) // data we're trying to load
-  const [loadingGames, setLoadingGames] = useState([]) // whether we're loading or not
-  const [errorGames, setErrorGames] = useState<null | string>() // whether we've run into an error
+  const [gameSched, setGameSched] = useState<GameType[] | null>(null) // data we're trying to load
+  const [loadingGames, setLoadingGames] = useState(false) // whether we're loading or not
+  const [errorGames, setErrorGames] = useState<string>("") // whether we've run into an error 
+  console.log("errorGames", errorGames)
 
   const [teams, setTeams] = useState<[TeamsType]>([{teamId: 0, teamName: "Select a Team"}]) // data to load
   const [loadingTeams, setLoadingTeams] = useState([]) // whether we're loading or not
   const [errorTeams, setErrorTeams] = useState<null | string>() // whether we've run into an error
 
   const [allPlayers, setAllPlayers] = useState<PlayerType[]>([])
-  const [loadingPlayers, setLoadingPlayers] = useState([]) // whether we're loading or not
-  const [errorPlayers, setErrorPlayers] = useState<null | string>() // whether we've run into an error
+  const [loadingPlayers, setLoadingPlayers] = useState(false) // whether we're loading or not
+  const [errorPlayers, setErrorPlayers] = useState<null | string>("") // whether we've run into an error
 
 
 
@@ -58,19 +59,20 @@ function App() {
         const response = await fetch(gamesBinUrl, {
           method: "GET",
           headers: { // read the documentation for JSONBin.io to get the headers
-            "X-Master-Key": MY_API_KEY,
-            "X-Bin-Meta": false,
-            "X-JSON-Path": "$..games"
+            'X-Master-Key': MY_API_KEY,
+            'X-Bin-Meta': "false"
           }}
         )
         // check for a bad response error
         if (!response.ok) {
           setErrorGames("Error: " + response.statusText)
         } else {
-          const data:GameType | null = await response.json()
+          const data:GameType[] | null = await response.json()
           console.log("array", data)
-          const gameSchedArray = data[0]
+          const gameSchedArray:GameType[] | null = data
+          console.log("data", data)
           setGameSched(gameSchedArray)
+          console.log("gameSched", gameSched)
         }   
       } catch(error: any) {
         setErrorGames("Error: " + error.message)

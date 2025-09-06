@@ -4,7 +4,7 @@ import type { GameType } from './ExportTypes'
 import { Link } from 'react-router-dom'
 
 type GamesListProps = {
-  gameSched: GameType[],
+  gameSched: GameType[] | null,
   loadingGames: boolean,
   errorGames: string
 }
@@ -13,6 +13,8 @@ type GamesListProps = {
 function GamesListPage( {gameSched,
   loadingGames,
   errorGames}: GamesListProps) {
+
+    console.log("gameSched", gameSched)
 
   return (
     <div className="gamesList">
