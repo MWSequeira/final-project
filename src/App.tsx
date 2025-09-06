@@ -45,7 +45,7 @@ function App() {
 
   const [allPlayers, setAllPlayers] = useState<PlayerType[]>([])
   const [loadingPlayers, setLoadingPlayers] = useState(false) // whether we're loading or not
-  const [errorPlayers, setErrorPlayers] = useState<null | string>("") // whether we've run into an error
+  const [errorPlayers, setErrorPlayers] = useState<null | string>(null) // whether we've run into an error
 
 
 
